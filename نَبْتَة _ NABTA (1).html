@@ -1,0 +1,3470 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نَبْتَة | NABTA — نتعلم، نلعب، نبدع، ونكبر بالعلم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+            tajawal: ['Tajawal', 'sans-serif'],
+          },
+          colors: {
+            nabta: {
+              teal: '#0D9488',
+              tealLight: '#14B8A6',
+              gold: '#F59E0B',
+              goldLight: '#FACC15',
+              sky: '#0EA5E9',
+              skyLight: '#38BDF8',
+              purple: '#8B5CF6',
+              purpleLight: '#C4B5FD',
+              surface: '#F8FAFC',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --teal-main: #0D9488;
+      --teal-soft: #14B8A6;
+      --gold-main: #F59E0B;
+      --gold-soft: #FACC15;
+      --sky-main: #0EA5E9;
+      --purple-main: #8B5CF6;
+      --bg-canvas: #F8FAFC;
+    }
+
+    body {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      background-color: var(--bg-canvas);
+      color: #1E293B;
+      overflow-x: hidden;
+    }
+
+    .font-story {
+      font-family: 'Tajawal', 'Cairo', sans-serif;
+    }
+
+    .btn-tactile {
+      transition: transform 0.14s ease, box-shadow 0.14s ease, background-color 0.2s ease;
+      box-shadow: 0 4px 0 rgba(15, 23, 42, 0.16);
+    }
+
+    .btn-tactile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 rgba(15, 23, 42, 0.16);
+    }
+
+    .btn-tactile:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.16);
+    }
+
+    .btn-teal {
+      box-shadow: 0 4px 0 #0F766E;
+    }
+    .btn-teal:active {
+      box-shadow: 0 1px 0 #0F766E;
+    }
+
+    .btn-gold {
+      box-shadow: 0 4px 0 #B45309;
+    }
+    .btn-gold:active {
+      box-shadow: 0 1px 0 #B45309;
+    }
+
+    .btn-sky {
+      box-shadow: 0 4px 0 #0369A1;
+    }
+    .btn-sky:active {
+      box-shadow: 0 1px 0 #0369A1;
+    }
+
+    .btn-purple {
+      box-shadow: 0 4px 0 #6D28D9;
+    }
+    .btn-purple:active {
+      box-shadow: 0 1px 0 #6D28D9;
+    }
+
+    @keyframes sproutFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(2deg); }
+    }
+
+    @keyframes pulseStar {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.92) translateY(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .animate-sprout {
+      animation: sproutFloat 3.6s ease-in-out infinite;
+    }
+
+    .animate-star {
+      animation: pulseStar 2.4s ease-in-out infinite;
+    }
+
+    .animate-pop {
+      animation: popIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .card-lift {
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .card-lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px -8px rgba(15, 23, 42, 0.12);
+    }
+
+    .hero-pattern {
+      background-color: #FFFFFF;
+      background-image:
+        radial-gradient(circle at 12% 18%, rgba(20, 184, 166, 0.12) 0%, transparent 32%),
+        radial-gradient(circle at 88% 15%, rgba(250, 204, 21, 0.16) 0%, transparent 34%),
+        radial-gradient(circle at 80% 82%, rgba(56, 189, 248, 0.12) 0%, transparent 32%),
+        radial-gradient(circle at 18% 85%, rgba(196, 181, 253, 0.18) 0%, transparent 32%);
+    }
+
+    .memory-card {
+      perspective: 800px;
+    }
+
+    .memory-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .memory-card.flipped .memory-inner,
+    .memory-card.matched .memory-inner {
+      transform: rotateY(180deg);
+    }
+
+    .memory-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .memory-back {
+      transform: rotateY(180deg);
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F1F5F9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-teal-200 selection:text-teal-900">
+
+  <div id="toastContainer" class="fixed bottom-5 left-5 z-50 flex flex-col gap-2 max-w-sm pointer-events-none"></div>
+
+  <div id="modalOverlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 hidden items-center justify-center p-4 overflow-y-auto">
+    <div id="modalBox" class="bg-white rounded-3xl max-w-xl w-full p-6 md:p-8 shadow-2xl border-2 border-slate-100 animate-pop relative my-auto"></div>
+  </div>
+
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 gap-3">
+        <button onclick="navigateView('welcome')" class="flex items-center gap-3 text-right group focus:outline-none">
+          <div id="brandLogoSlot" class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500 to-emerald-400 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform"></div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-2xl font-black text-teal-700 tracking-tight">نَبْتَة</span>
+              <span class="text-xs font-extrabold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 tracking-wider">NABTA</span>
+            </div>
+            <p id="headerTagline" class="text-xs text-slate-500 font-semibold hidden sm:block">نتعلم، نلعب، نبدع، ونكبر بالعلم.</p>
+          </div>
+        </button>
+
+        <nav id="primaryNav" class="hidden lg:flex items-center gap-1.5 bg-slate-100/90 p-1.5 rounded-2xl">
+          <button data-nav="welcome" onclick="navigateView('welcome')" class="nav-pill px-3.5 py-2 rounded-xl text-sm font-bold transition-all">الرئيسية</button>
+          <button data-nav="subjects" onclick="navigateView('subjects')" class="nav-pill px-3.5 py-2 rounded-xl text-sm font-bold transition-all">المواد الدراسية</button>
+          <button data-nav="games" onclick="navigateView('games')" class="nav-pill px-3.5 py-2 rounded-xl text-sm font-bold transition-all">الألعاب</button>
+          <button data-nav="stories" onclick="navigateView('stories')" class="nav-pill px-3.5 py-2 rounded-xl text-sm font-bold transition-all">القصص</button>
+          <button data-nav="competitions" onclick="navigateView('competitions')" class="nav-pill px-3.5 py-2 rounded-xl text-sm font-bold transition-all">المسابقات</button>
+          <button data-nav="profile" onclick="navigateView('profile')" class="nav-pill px-3.5 py-2 rounded-xl text-sm font-bold transition-all">حسابي</button>
+        </nav>
+
+        <div class="flex items-center gap-2 sm:gap-3">
+          <div id="headerStudentChip" onclick="navigateView('profile')" class="cursor-pointer flex items-center gap-2 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-2xl transition-colors">
+            <span id="headerAvatarMini" class="w-7 h-7 rounded-full overflow-hidden flex items-center justify-center bg-white shadow-sm"></span>
+            <div class="hidden sm:block text-right leading-tight">
+              <div id="headerStudentName" class="text-xs font-extrabold text-slate-800">آدم</div>
+              <div class="text-[11px] font-bold text-amber-600"><span id="headerPoints">15</span> نقطة ⭐</div>
+            </div>
+            <span id="headerPointsMobile" class="sm:hidden text-xs font-extrabold text-amber-700">15 ⭐</span>
+          </div>
+
+          <button onclick="toggleInterfaceLang()" id="langToggleBtn" title="تبديل اللغة / Switch Language" class="px-2.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-extrabold text-slate-700 transition-colors">
+            EN
+          </button>
+
+          <div class="hidden md:flex items-center gap-1.5 border-r border-slate-200 pr-2">
+            <button onclick="navigateView('parent')" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-sky-50 text-sky-700 hover:bg-sky-100 border border-sky-200 transition-colors">
+              ولي الأمر
+            </button>
+            <button onclick="navigateView('admin')" class="px-3 py-2 rounded-xl text-xs font-extrabold bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200 transition-colors">
+              الإدارة
+            </button>
+          </div>
+
+          <button onclick="toggleMobileDrawer()" class="lg:hidden p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700" aria-label="القائمة">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="mobileDrawer" class="hidden lg:hidden bg-white border-t border-slate-100 px-4 py-4 space-y-2 shadow-lg">
+      <div class="grid grid-cols-2 gap-2">
+        <button onclick="navigateView('welcome'); toggleMobileDrawer()" class="p-3 rounded-2xl bg-slate-50 hover:bg-teal-50 text-right font-bold text-sm text-slate-800">🌱 الرئيسية</button>
+        <button onclick="navigateView('subjects'); toggleMobileDrawer()" class="p-3 rounded-2xl bg-slate-50 hover:bg-teal-50 text-right font-bold text-sm text-slate-800">📚 المواد الدراسية</button>
+        <button onclick="navigateView('games'); toggleMobileDrawer()" class="p-3 rounded-2xl bg-slate-50 hover:bg-teal-50 text-right font-bold text-sm text-slate-800">🎮 الألعاب التعليمية</button>
+        <button onclick="navigateView('stories'); toggleMobileDrawer()" class="p-3 rounded-2xl bg-slate-50 hover:bg-teal-50 text-right font-bold text-sm text-slate-800">📖 مكتبة القصص</button>
+        <button onclick="navigateView('competitions'); toggleMobileDrawer()" class="p-3 rounded-2xl bg-slate-50 hover:bg-teal-50 text-right font-bold text-sm text-slate-800">🏆 المسابقات</button>
+        <button onclick="navigateView('profile'); toggleMobileDrawer()" class="p-3 rounded-2xl bg-slate-50 hover:bg-teal-50 text-right font-bold text-sm text-slate-800">⭐ حساب الطفل</button>
+      </div>
+      <div class="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2">
+        <button onclick="navigateView('parent'); toggleMobileDrawer()" class="p-3 rounded-2xl bg-sky-50 text-sky-800 font-extrabold text-sm text-center">لوحة ولي الأمر</button>
+        <button onclick="navigateView('admin'); toggleMobileDrawer()" class="p-3 rounded-2xl bg-purple-50 text-purple-800 font-extrabold text-sm text-center">لوحة الإدارة</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="appViewport" class="flex-1 w-full"></main>
+
+  <footer class="bg-white border-t border-slate-200 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div id="footerLogoSlot" class="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center"></div>
+          <div>
+            <span class="font-black text-lg text-teal-800">نَبْتَة | NABTA</span>
+            <p class="text-xs text-slate-500 font-semibold">نتعلم، نلعب، نبدع، ونكبر بالعلم. — بيئة تعليمية آمنة للأطفال</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap items-center justify-center gap-4 text-xs font-bold text-slate-600">
+          <button onclick="navigateView('welcome')" class="hover:text-teal-600">قصة نبتة</button>
+          <button onclick="navigateView('subjects')" class="hover:text-teal-600">المناهج التفاعلية</button>
+          <button onclick="navigateView('games')" class="hover:text-teal-600">منطقة الألعاب</button>
+          <button onclick="navigateView('parent')" class="hover:text-sky-600">بوابة ولي الأمر</button>
+          <button onclick="navigateView('admin')" class="hover:text-purple-600">إدارة المنصة</button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    window.nabtaCloud = {
+      ready: false,
+      db: null,
+      auth: null,
+      user: null,
+      appId: typeof __app_id !== 'undefined' ? __app_id : 'nabta-edu-platform',
+      async init() {
+        try {
+          if (typeof __firebase_config === 'undefined') return;
+          const config = JSON.parse(__firebase_config);
+          const app = initializeApp(config);
+          this.auth = getAuth(app);
+          this.db = getFirestore(app);
+
+          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+            await signInWithCustomToken(this.auth, __initial_auth_token);
+          } else {
+            await signInAnonymously(this.auth);
+          }
+
+          this.user = this.auth.currentUser;
+          if (!this.user) return;
+          this.ready = true;
+
+          const stateRef = doc(this.db, 'artifacts', this.appId, 'public', 'data', 'nabta_platform', 'state_v1');
+          onSnapshot(stateRef, (snap) => {
+            if (snap.exists() && window.applyCloudSnapshot) {
+              window.applyCloudSnapshot(snap.data());
+            }
+          }, (err) => {
+            console.warn('Cloud sync listener notice:', err.message);
+          });
+        } catch (err) {
+          console.warn('Running in standalone session mode:', err.message);
+        }
+      },
+      async pushState(serializedState) {
+        if (!this.ready || !this.user || !this.db) return;
+        try {
+          const stateRef = doc(this.db, 'artifacts', this.appId, 'public', 'data', 'nabta_platform', 'state_v1');
+          await setDoc(stateRef, {
+            payload: JSON.stringify(serializedState),
+            updatedAt: Date.now()
+          }, { merge: true });
+        } catch (err) {
+          console.warn('Cloud save skipped:', err.message);
+        }
+      }
+    };
+
+    window.nabtaCloud.init();
+  </script>
+
+  <script>
+    const svgArtwork = {
+      sproutMascot(size = 80) {
+        return `
+          <svg width="${size}" height="${size}" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="64" r="46" fill="#CCFBF1"/>
+            <path d="M60 88V48" stroke="#0D9488" stroke-width="7" stroke-linecap="round"/>
+            <path d="M60 54C42 54 28 42 30 25C47 24 60 36 60 54Z" fill="#14B8A6" stroke="#0F766E" stroke-width="3"/>
+            <path d="M60 48C78 48 92 36 90 19C73 18 60 30 60 48Z" fill="#2DD4BF" stroke="#0F766E" stroke-width="3"/>
+            <circle cx="60" cy="76" r="24" fill="#FACC15" stroke="#F59E0B" stroke-width="3"/>
+            <circle cx="52" cy="73" r="3" fill="#1E293B"/>
+            <circle cx="68" cy="73" r="3" fill="#1E293B"/>
+            <circle cx="47" cy="78" r="3.5" fill="#FB7185" opacity="0.55"/>
+            <circle cx="73" cy="78" r="3.5" fill="#FB7185" opacity="0.55"/>
+            <path d="M53 81C56 85 64 85 67 81" stroke="#1E293B" stroke-width="3" stroke-linecap="round"/>
+            <path d="M60 8L62.5 14L69 14.5L64 18.8L65.5 25L60 21.6L54.5 25L56 18.8L51 14.5L57.5 14L60 8Z" fill="#F59E0B"/>
+          </svg>
+        `;
+      },
+      logoMark(size = 28) {
+        return `
+          <svg width="${size}" height="${size}" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 40V20" stroke="#FFFFFF" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M24 24C14 24 8 17 10 8C19 8 24 14 24 24Z" fill="#FACC15"/>
+            <path d="M24 20C34 20 40 13 38 4C29 4 24 10 24 20Z" fill="#FFFFFF"/>
+            <circle cx="24" cy="36" r="5" fill="#FDE047"/>
+          </svg>
+        `;
+      },
+      avatars: {
+        lion: `<svg viewBox="0 0 80 80" class="w-full h-full"><circle cx="40" cy="40" r="40" fill="#FEF3C7"/><circle cx="40" cy="42" r="24" fill="#F59E0B"/><circle cx="40" cy="43" r="17" fill="#FDE68A"/><circle cx="34" cy="40" r="2.5" fill="#1E293B"/><circle cx="46" cy="40" r="2.5" fill="#1E293B"/><path d="M36 47Q40 51 44 47" stroke="#1E293B" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg>`,
+        bunny: `<svg viewBox="0 0 80 80" class="w-full h-full"><circle cx="40" cy="40" r="40" fill="#E0F2FE"/><ellipse cx="32" cy="22" rx="5" ry="14" fill="#FFFFFF" stroke="#38BDF8" stroke-width="2"/><ellipse cx="48" cy="22" rx="5" ry="14" fill="#FFFFFF" stroke="#38BDF8" stroke-width="2"/><circle cx="40" cy="46" r="18" fill="#FFFFFF"/><circle cx="34" cy="44" r="2.5" fill="#1E293B"/><circle cx="46" cy="44" r="2.5" fill="#1E293B"/><circle cx="40" cy="48" r="2.5" fill="#FB7185"/></svg>`,
+        owl: `<svg viewBox="0 0 80 80" class="w-full h-full"><circle cx="40" cy="40" r="40" fill="#EDE9FE"/><circle cx="40" cy="44" r="20" fill="#8B5CF6"/><circle cx="33" cy="41" r="6" fill="#FFFFFF"/><circle cx="47" cy="41" r="6" fill="#FFFFFF"/><circle cx="33" cy="41" r="2.5" fill="#1E293B"/><circle cx="47" cy="41" r="2.5" fill="#1E293B"/><polygon points="37,46 43,46 40,51" fill="#FACC15"/></svg>`,
+        astronaut: `<svg viewBox="0 0 80 80" class="w-full h-full"><circle cx="40" cy="40" r="40" fill="#CCFBF1"/><circle cx="40" cy="42" r="21" fill="#FFFFFF" stroke="#0D9488" stroke-width="3"/><rect x="26" y="32" width="28" height="18" rx="9" fill="#0F172A"/><circle cx="34" cy="41" r="2.5" fill="#38BDF8"/><circle cx="46" cy="41" r="2.5" fill="#38BDF8"/></svg>`,
+        starKid: `<svg viewBox="0 0 80 80" class="w-full h-full"><circle cx="40" cy="40" r="40" fill="#FEF9C3"/><polygon points="40,12 48,30 68,32 52,45 57,64 40,54 23,64 28,45 12,32 32,30" fill="#FACC15" stroke="#F59E0B" stroke-width="2"/><circle cx="35" cy="39" r="2.2" fill="#1E293B"/><circle cx="45" cy="39" r="2.2" fill="#1E293B"/><path d="M36 45Q40 48 44 45" stroke="#1E293B" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+        flower: `<svg viewBox="0 0 80 80" class="w-full h-full"><circle cx="40" cy="40" r="40" fill="#FCE7F3"/><circle cx="40" cy="24" r="10" fill="#F472B6"/><circle cx="54" cy="36" r="10" fill="#F472B6"/><circle cx="49" cy="53" r="10" fill="#F472B6"/><circle cx="31" cy="53" r="10" fill="#F472B6"/><circle cx="26" cy="36" r="10" fill="#F472B6"/><circle cx="40" cy="40" r="13" fill="#FACC15"/><circle cx="36" cy="38" r="2" fill="#1E293B"/><circle cx="44" cy="38" r="2" fill="#1E293B"/></svg>`
+      },
+      storyScene(theme) {
+        const scenes = {
+          garden: `<svg viewBox="0 0 400 180" class="w-full h-44 rounded-2xl"><rect width="400" height="180" fill="#E0F2FE"/><circle cx="330" cy="42" r="24" fill="#FACC15"/><path d="M0 135 Q120 115 240 135 T400 130 L400 180 L0 180 Z" fill="#14B8A6"/><circle cx="95" cy="115" r="22" fill="#0D9488"/><rect x="91" y="125" width="8" height="22" fill="#78350F"/><circle cx="260" cy="128" r="8" fill="#F59E0B"/><circle cx="285" cy="134" r="6" fill="#8B5CF6"/></svg>`,
+          mosque: `<svg viewBox="0 0 400 180" class="w-full h-44 rounded-2xl"><rect width="400" height="180" fill="#EDE9FE"/><circle cx="70" cy="42" r="20" fill="#FACC15"/><circle cx="78" cy="38" r="17" fill="#EDE9FE"/><rect x="130" y="85" width="140" height="75" rx="8" fill="#FFFFFF"/><path d="M150 85 Q200 30 250 85 Z" fill="#8B5CF6"/><rect x="110" y="55" width="16" height="105" fill="#C4B5FD"/><rect x="274" y="55" width="16" height="105" fill="#C4B5FD"/><rect x="0" y="158" width="400" height="22" fill="#0D9488"/></svg>`,
+          stars: `<svg viewBox="0 0 400 180" class="w-full h-44 rounded-2xl"><rect width="400" height="180" fill="#0F172A"/><circle cx="90" cy="45" r="3" fill="#FACC15"/><circle cx="180" cy="30" r="4" fill="#38BDF8"/><circle cx="290" cy="52" r="3.5" fill="#FACC15"/><circle cx="340" cy="95" r="3" fill="#C4B5FD"/><path d="M0 140 Q200 100 400 145 L400 180 L0 180 Z" fill="#1E293B"/><polygon points="200,55 206,72 224,72 210,83 215,100 200,90 185,100 190,83 176,72 194,72" fill="#FACC15"/></svg>`,
+          library: `<svg viewBox="0 0 400 180" class="w-full h-44 rounded-2xl"><rect width="400" height="180" fill="#FEF3C7"/><rect x="55" y="40" width="290" height="115" rx="12" fill="#FFFFFF" stroke="#F59E0B" stroke-width="3"/><rect x="80" y="65" width="24" height="65" rx="4" fill="#0D9488"/><rect x="110" y="72" width="22" height="58" rx="4" fill="#0EA5E9"/><rect x="138" y="60" width="26" height="70" rx="4" fill="#8B5CF6"/><rect x="170" y="75" width="22" height="55" rx="4" fill="#F59E0B"/><circle cx="285" cy="98" r="28" fill="#CCFBF1"/></svg>`
+        };
+        return scenes[theme] || scenes.garden;
+      },
+      shapeSvg(shapeKey) {
+        const shapes = {
+          square: `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><rect x="18" y="18" width="64" height="64" rx="8" fill="#FACC15" stroke="#B45309" stroke-width="4"/></svg>`,
+          circle: `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><circle cx="50" cy="50" r="34" fill="#38BDF8" stroke="#0369A1" stroke-width="4"/></svg>`,
+          triangle: `<svg viewBox="0 0 100 100" class="w-24 h-24 mx-auto"><polygon points="50,14 86,82 14,82" fill="#14B8A6" stroke="#0F766E" stroke-width="4" stroke-linejoin="round"/></svg>`,
+          rectangle: `<svg viewBox="0 0 120 100" class="w-28 h-24 mx-auto"><rect x="10" y="24" width="100" height="52" rx="8" fill="#C4B5FD" stroke="#6D28D9" stroke-width="4"/></svg>`
+        };
+        return shapes[shapeKey] || shapes.square;
+      }
+    };
+
+    const initialNabtaData = {
+      lang: 'ar',
+      activeStudentId: 'stu-1',
+      students: [
+        {
+          id: 'stu-1',
+          name: 'آدم محمود',
+          avatar: 'lion',
+          grade: 'الصف الثالث الابتدائي (8 سنوات)',
+          points: 15,
+          stars: 6,
+          enrolledSubjects: ['arabic', 'english', 'math', 'islamic'],
+          completedLevels: ['ar-1', 'en-1'],
+          completedLessons: ['ar-l1', 'ar-l2', 'en-l1'],
+          completedHomework: ['hw-1'],
+          storyProgress: { 'st-1': 100, 'st-2': 50 },
+          badges: ['نجم البدايات', 'بطل الحروف'],
+          achievementsLog: [
+            { title: 'إتمام المستوى الأول في اللغة العربية', points: 5, date: '2026-11-12' },
+            { title: 'إتمام المستوى الأول في اللغة الإنجليزية', points: 5, date: '2026-11-14' },
+            { title: 'قراءة قصة الأمانة والصدق كاملة', points: 5, date: '2026-11-15' }
+          ]
+        },
+        {
+          id: 'stu-2',
+          name: 'سلمى كريم',
+          avatar: 'flower',
+          grade: 'الصف الثاني الابتدائي (7 سنوات)',
+          points: 10,
+          stars: 4,
+          enrolledSubjects: ['arabic', 'english', 'math', 'islamic'],
+          completedLevels: ['math-1'],
+          completedLessons: ['math-l1', 'isl-l1'],
+          completedHomework: [],
+          storyProgress: { 'st-3': 66 },
+          badges: ['نجم البدايات', 'عبقري الأرقام'],
+          achievementsLog: [
+            { title: 'إتمام المستوى الأول في الرياضيات', points: 5, date: '2026-11-13' },
+            { title: 'مكافأة المواظبة الأسبوعية', points: 5, date: '2026-11-15' }
+          ]
+        }
+      ],
+      curriculumTracks: {
+        arabic: {
+          id: 'arabic',
+          title: 'قسم اللغة العربية',
+          subtitle: 'الحروف، القراءة والكتابة، تكوين الكلمات، والقواعد المبسطة',
+          icon: '📚',
+          themeColor: 'teal',
+          badgeBg: 'bg-teal-100 text-teal-800',
+          headerGrad: 'from-teal-600 to-emerald-500',
+          levels: [
+            {
+              id: 'ar-1',
+              number: 1,
+              title: 'المستوى الأول: الحروف العربية والحركات',
+              description: 'تعلّم نطق الحروف بالفتحة والضمة والكسرة مع أمثلة مصورة.',
+              lessons: [
+                {
+                  id: 'ar-l1',
+                  title: 'الحروف والحركات القصيرة (الفتحة والضمة والكسرة)',
+                  summary: 'الحركات تغيّر صوت الحرف وتساعدنا على قراءة الكلمات بسهولة.',
+                  interactiveType: 'arabic_letters',
+                  letters: [
+                    { char: 'أ', fatha: 'أَ - أَسَد', damma: 'أُ - أُذُن', kasra: 'إِ - إِبْرَة' },
+                    { char: 'ب', fatha: 'بَ - بَطَّة', damma: 'بُ - بُرْتُقَال', kasra: 'بِ - بِطِّيخ' },
+                    { char: 'ت', fatha: 'تَ - تَمْر', damma: 'تُ - تُفَّاح', kasra: 'تِ - تِمْسَاح' },
+                    { char: 'ج', fatha: 'جَ - جَمَل', damma: 'جُ - جُبْن', kasra: 'جِ - جِسْر' },
+                    { char: 'س', fatha: 'سَ - سَمَكَة', damma: 'سُ - سُلَحْفَاة', kasra: 'سِ - سِتَارَة' },
+                    { char: 'ق', fatha: 'قَ - قَمَر', damma: 'قُ - قُبَّعَة', kasra: 'قِ - قِطَّة' }
+                  ]
+                },
+                {
+                  id: 'ar-l2',
+                  title: 'القراءة وتكوين الكلمات من المقاطع',
+                  summary: 'نجمع الحروف المتصلة لنكوّن كلمات مفيدة نقرأها بطلاقة.',
+                  interactiveType: 'word_builder',
+                  words: [
+                    { parts: ['قَـ', 'ـلَـ', 'ـم'], full: 'قَلَم', meaning: 'أداة نكتب بها في الدفتر' },
+                    { parts: ['شَـ', 'ـمْـ', 'ـس'], full: 'شَمْس', meaning: 'تنير الأرض في الصباح' },
+                    { parts: ['نَـ', 'ـبْـ', 'ـتَـ', 'ـة'], full: 'نَبْتَة', meaning: 'تكبر بالماء والعلم' }
+                  ]
+                }
+              ],
+              quiz: [
+                {
+                  q: 'ما الكلمة التي تبدأ بحرف القاف المضموم (قُ)؟',
+                  options: ['قَمَر', 'قُبَّعَة', 'قِطَّة'],
+                  answer: 1
+                },
+                {
+                  q: 'عند دمج الحروف (كِ + تَا + ب) نحصل على كلمة:',
+                  options: ['كِتَاب', 'مَكْتَب', 'كَاتِب'],
+                  answer: 0
+                },
+                {
+                  q: 'أي حركة نضعها فوق الحرف لننطقه بصوت مفتوح؟',
+                  options: ['الكسرة', 'الضمة', 'الفتحة'],
+                  answer: 2
+                }
+              ]
+            },
+            {
+              id: 'ar-2',
+              number: 2,
+              title: 'المستوى الثاني: القواعد النحوية المبسطة',
+              description: 'التفريق بين المذكر والمؤنث، والمفرد والجمع بأسلوب ممتع.',
+              lessons: [
+                {
+                  id: 'ar-l3',
+                  title: 'المذكر والمؤنث والمفرد والجمع',
+                  summary: 'المذكر يدل على الولد مثل (طالب)، والمؤنث يدل على البنت وينتهي غالباً بتاء مربوطة مثل (طالبة).',
+                  interactiveType: 'grammar_cards',
+                  pairs: [
+                    { rule: 'المذكر 👦', example: 'مُعَلِّم مجتهد — قَمَر منير' },
+                    { rule: 'المؤنث 👧', example: 'مُعَلِّمَة مجتهدة — شَمْس مشرقة' },
+                    { rule: 'المفرد (واحد)', example: 'كِتَاب — نَجْمَة — زَهْرَة' },
+                    { rule: 'الجمع (أكثر من اثنين)', example: 'كُتُب — نُجُوم — أَزْهَار' }
+                  ]
+                }
+              ],
+              quiz: [
+                {
+                  q: 'ما جمع كلمة (نَجْمَة)؟',
+                  options: ['نَجْمَتَان', 'نُجُوم', 'نَجْم'],
+                  answer: 1
+                },
+                {
+                  q: 'كلمة (طَبِيبَة) تدل على:',
+                  options: ['المؤنث', 'المذكر', 'الجمع'],
+                  answer: 0
+                }
+              ]
+            }
+          ]
+        },
+        english: {
+          id: 'english',
+          title: 'قسم اللغة الإنجليزية',
+          subtitle: 'الحروف، الكلمات الأساسية، الألوان والأرقام، الاستماع والنطق',
+          icon: '🇬🇧',
+          themeColor: 'sky',
+          badgeBg: 'bg-sky-100 text-sky-800',
+          headerGrad: 'from-sky-500 to-blue-600',
+          levels: [
+            {
+              id: 'en-1',
+              number: 1,
+              title: 'المستوى الأول: الحروف الإنجليزية والنطق الصوتي',
+              description: 'اضغط على أي حرف أو كلمة للاستماع إلى النطق الصحيح باللغة الإنجليزية.',
+              lessons: [
+                {
+                  id: 'en-l1',
+                  title: 'الحروف الإنجليزية مع الصوتيات (Alphabet & Phonics)',
+                  summary: 'استمع لنطق الحرف والكلمة وكررها بصوت واضح.',
+                  interactiveType: 'english_speech',
+                  items: [
+                    { word: 'A - Apple', speak: 'A is for Apple', ar: 'تفاحة', emoji: '🍎' },
+                    { word: 'B - Book', speak: 'B is for Book', ar: 'كتاب', emoji: '📘' },
+                    { word: 'C - Cat', speak: 'C is for Cat', ar: 'قطة', emoji: '🐱' },
+                    { word: 'D - Duck', speak: 'D is for Duck', ar: 'بطة', emoji: '🦆' },
+                    { word: 'E - Elephant', speak: 'E is for Elephant', ar: 'فيل', emoji: '🐘' },
+                    { word: 'S - Star', speak: 'S is for Star', ar: 'نجمة', emoji: '⭐' }
+                  ]
+                },
+                {
+                  id: 'en-l2',
+                  title: 'الألوان والأرقام الأساسية (Colors & Numbers)',
+                  summary: 'تعرّف على أسماء الألوان والأرقام بالإنجليزية واستمع إليها.',
+                  interactiveType: 'english_speech',
+                  items: [
+                    { word: 'Red - أحمر', speak: 'Red', ar: 'اللون الأحمر', emoji: '🔴' },
+                    { word: 'Blue - أزرق', speak: 'Blue', ar: 'اللون الأزرق', emoji: '🔵' },
+                    { word: 'Green - أخضر', speak: 'Green', ar: 'اللون الأخضر', emoji: '🟢' },
+                    { word: 'Yellow - أصفر', speak: 'Yellow', ar: 'اللون الأصفر', emoji: '🟡' },
+                    { word: 'One, Two, Three', speak: 'One, Two, Three', ar: 'واحد، اثنان، ثلاثة', emoji: '1️⃣' },
+                    { word: 'I love learning!', speak: 'I love learning!', ar: 'أنا أحب التعلم!', emoji: '🌱' }
+                  ]
+                }
+              ],
+              quiz: [
+                {
+                  q: 'ما معنى كلمة (Apple) باللغة العربية؟',
+                  options: ['موزة', 'تفاحة', 'برتقالة'],
+                  answer: 1
+                },
+                {
+                  q: 'أي كلمة تعبر عن اللون الأخضر؟',
+                  options: ['Blue', 'Yellow', 'Green'],
+                  answer: 2
+                },
+                {
+                  q: 'بأي حرف تبدأ كلمة (Star)؟',
+                  options: ['S', 'C', 'B'],
+                  answer: 0
+                }
+              ]
+            },
+            {
+              id: 'en-2',
+              number: 2,
+              title: 'المستوى الثاني: الكلمات الأساسية وتكوين الجمل',
+              description: 'كوّن جملاً إنجليزية بسيطة واستمع لنطقها الكامل.',
+              lessons: [
+                {
+                  id: 'en-l3',
+                  title: 'تكوين الجمل البسيطة (Simple Sentences)',
+                  summary: 'اضغط على الجملة لسماعها كاملة وتعلم تركيبها.',
+                  interactiveType: 'english_speech',
+                  items: [
+                    { word: 'I am a smart student.', speak: 'I am a smart student.', ar: 'أنا طالب ذكي.', emoji: '🎓' },
+                    { word: 'The sun is yellow.', speak: 'The sun is yellow.', ar: 'الشمس صفراء.', emoji: '☀️' },
+                    { word: 'I read a good book.', speak: 'I read a good book.', ar: 'أنا أقرأ كتاباً مفيداً.', emoji: '📖' }
+                  ]
+                }
+              ],
+              quiz: [
+                {
+                  q: 'اختر الترجمة الصحيحة لجملة: (The sun is yellow)',
+                  options: ['القمر أبيض', 'الشمس صفراء', 'السماء زرقاء'],
+                  answer: 1
+                },
+                {
+                  q: 'أكمل الجملة: I ___ a smart student.',
+                  options: ['am', 'is', 'are'],
+                  answer: 0
+                }
+              ]
+            }
+          ]
+        },
+        math: {
+          id: 'math',
+          title: 'قسم الرياضيات',
+          subtitle: 'الأرقام والعد، الجمع والطرح، الضرب والقسمة، والأشكال الهندسية',
+          icon: '➗',
+          themeColor: 'gold',
+          badgeBg: 'bg-amber-100 text-amber-800',
+          headerGrad: 'from-amber-500 to-yellow-500',
+          levels: [
+            {
+              id: 'math-1',
+              number: 1,
+              title: 'المستوى الأول: الأرقام والعد والأشكال الهندسية',
+              description: 'تعرّف على الأشكال الهندسية وعدد أضلاعها وتدرّب على العد البصري.',
+              lessons: [
+                {
+                  id: 'math-l1',
+                  title: 'الأشكال الهندسية الممتعة',
+                  summary: 'كل شكل هندسي حولنا له عدد محدد من الأضلاع والزوايا.',
+                  interactiveType: 'math_shapes',
+                  shapes: [
+                    { key: 'square', name: 'المربع', info: 'له 4 أضلاع متساوية في الطول و4 زوايا قائمة.' },
+                    { key: 'triangle', name: 'المثلث', info: 'له 3 أضلاع و3 رؤوس، ويشبه الهرم أو الخيمة.' },
+                    { key: 'circle', name: 'الدائرة', info: 'شكل مستدير جميل ليس له أضلاع ولا زوايا.' },
+                    { key: 'rectangle', name: 'المستطيل', info: 'له 4 أضلاع، كل ضلعين متقابلين متساويان.' }
+                  ]
+                },
+                {
+                  id: 'math-l2',
+                  title: 'مختبر الجمع والطرح التفاعلي',
+                  summary: 'جرّب تغيير الأرقام وشاهد الناتج فوراً!',
+                  interactiveType: 'math_sandbox'
+                }
+              ],
+              quiz: [
+                {
+                  q: 'كم عدد أضلاع المثلث؟',
+                  options: ['4 أضلاع', '3 أضلاع', '5 أضلاع'],
+                  answer: 1
+                },
+                {
+                  q: 'ما ناتج جمع: 7 + 8 = ؟',
+                  options: ['14', '15', '16'],
+                  answer: 1
+                },
+                {
+                  q: 'مع سلمى 12 تفاحة، أعطت أخاها 4 تفاحات، كم تبقى معها؟',
+                  options: ['8 تفاحات', '9 تفاحات', '7 تفاحات'],
+                  answer: 0
+                }
+              ]
+            },
+            {
+              id: 'math-2',
+              number: 2,
+              title: 'المستوى الثاني: الضرب والقسمة والمسائل الحسابية',
+              description: 'فهم الضرب كجمع متكرر والقسمة كتوزيع بالتساوي.',
+              lessons: [
+                {
+                  id: 'math-l3',
+                  title: 'أساسيات الضرب والقسمة',
+                  summary: '3 × 4 تعني جمع الرقم 4 ثلاث مرات = 12، و 12 ÷ 3 = 4.',
+                  interactiveType: 'grammar_cards',
+                  pairs: [
+                    { rule: 'الضرب (×)', example: '3 مجموعات × 4 نجوم = 12 نجمة ⭐' },
+                    { rule: 'القسمة (÷)', example: '10 أقلام ÷ 2 طفل = 5 أقلام لكل طفل ✏️' },
+                    { rule: 'مسألة حياتية', example: 'اشترى آدم 4 قصص، ثمن القصة 5 جنيهات = 20 جنيهاً' },
+                    { rule: 'قاعدة الصفر', example: 'أي رقم × 0 يساوي دائماً 0' }
+                  ]
+                }
+              ],
+              quiz: [
+                {
+                  q: 'ما ناتج: 4 × 5 = ؟',
+                  options: ['15', '20', '25'],
+                  answer: 1
+                },
+                {
+                  q: 'إذا وزعنا 18 قطعة حلوى بالتساوي على 3 أطفال، يأخذ كل طفل:',
+                  options: ['6 قطع', '5 قطع', '7 قطع'],
+                  answer: 0
+                }
+              ]
+            }
+          ]
+        },
+        islamic: {
+          id: 'islamic',
+          title: 'قسم التعليم الديني',
+          subtitle: 'قصار السور، الأذكار اليومية، قصص الأنبياء، والسيرة والأخلاق',
+          icon: '🕌',
+          themeColor: 'purple',
+          badgeBg: 'bg-purple-100 text-purple-800',
+          headerGrad: 'from-purple-600 to-indigo-500',
+          levels: [
+            {
+              id: 'isl-1',
+              number: 1,
+              title: 'المستوى الأول: قصار السور والأذكار اليومية',
+              description: 'تعلّم سور الإخلاص والفلق والناس وأذكار المسلم اليومية.',
+              lessons: [
+                {
+                  id: 'isl-l1',
+                  title: 'سورة الإخلاص وسورة الفلق مع المعاني المبسطة',
+                  summary: 'قراءة وتدبر معاني قصار السور التي نحفظها ونقرأها في صلاتنا.',
+                  interactiveType: 'grammar_cards',
+                  pairs: [
+                    { rule: 'سورة الإخلاص', example: '﴿قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ﴾' },
+                    { rule: 'معنى (الصمد)', example: 'الله وحده الذي تقصده المخلوقات في جميع حوائجها.' },
+                    { rule: 'دعاء قبل الطعام', example: 'بِسْمِ اللَّهِ، وإذا نسي في أوله يقول: بِسْمِ اللَّهِ فِي أَوَّلِهِ وَآخِرِهِ.' },
+                    { rule: 'أذكار الصباح', example: 'أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ.' }
+                  ]
+                },
+                {
+                  id: 'isl-l2',
+                  title: 'الأخلاق الإسلامية والآداب النبوية',
+                  summary: 'الصدق، بر الوالدين، وآداب الاستئذان وإفشاء السلام.',
+                  interactiveType: 'grammar_cards',
+                  pairs: [
+                    { rule: 'الصدق والأمانة', example: 'قال ﷺ: «إنَّ الصِّدْقَ يَهْدِي إلى البِرِّ، وإنَّ البِرَّ يَهْدِي إلى الجَنَّةِ».' },
+                    { rule: 'بر الوالدين', example: 'طاعة الوالدين والتحدث معهما بلطف وأدب والدعاء لهما.' },
+                    { rule: 'آداب الاستئذان', example: 'نطرق الباب ثلاث مرات برفق ونلقي السلام قبل الدخول.' },
+                    { rule: 'إماطة الأذى', example: 'الحفاظ على نظافة الشارع والمدرسة صدقة يؤجر عليها المسلم.' }
+                  ]
+                }
+              ],
+              quiz: [
+                {
+                  q: 'ماذا نقول قبل أن نبدأ في تناول الطعام؟',
+                  options: ['الحمد لله', 'بِسْمِ اللَّهِ', 'سبحان الله'],
+                  answer: 1
+                },
+                {
+                  q: 'كم مرة نطرق الباب عند الاستئذان للدخول؟',
+                  options: ['مرة واحدة بقوة', 'ثلاث مرات برفق', 'عشر مرات'],
+                  answer: 1
+                },
+                {
+                  q: 'سورة الإخلاص تعلمنا أن الله تعالى:',
+                  options: ['واحد أحد لا شريك له', 'يحتاج إلى أحد', 'له مثيل'],
+                  answer: 0
+                }
+              ]
+            },
+            {
+              id: 'isl-2',
+              number: 2,
+              title: 'المستوى الثاني: قصص الأنبياء والسيرة النبوية',
+              description: 'دروس مستفادة من حياة نبينا محمد ﷺ والأنبياء عليهم السلام.',
+              lessons: [
+                {
+                  id: 'isl-l3',
+                  title: 'من السيرة النبوية وقصص الأنبياء',
+                  summary: 'لُقِّب نبينا محمد ﷺ بالصادق الأمين قبل البعثة لحسن خلقه وأمانته.',
+                  interactiveType: 'grammar_cards',
+                  pairs: [
+                    { rule: 'الصادق الأمين ﷺ', example: 'كان أهل مكة يحفظون أماناتهم عند النبي ﷺ لشدة أمانته.' },
+                    { rule: 'رحمته بالأطفال ﷺ', example: 'كان النبي ﷺ يسلّم على الصبيان ويمسح على رؤوسهم برحمة.' },
+                    { rule: 'سيدنا نوح عليه السلام', example: 'صبر في دعوة قومه وبنى السفينة بأمر الله فنجّاه الله ومن آمن معه.' },
+                    { rule: 'سيدنا يونس عليه السلام', example: 'دعا ربه في بطن الحوت: «لا إله إلا أنت سبحانك إني كنت من الظالمين» فنجّاه الله.' }
+                  ]
+                }
+              ],
+              quiz: [
+                {
+                  q: 'بماذا لُقِّب النبي محمد ﷺ في مكة قبل البعثة؟',
+                  options: ['الصادق الأمين', 'الشاعر', 'التاجر الكبير'],
+                  answer: 0
+                },
+                {
+                  q: 'ما الدعاء الذي دعا به سيدنا يونس عليه السلام في بطن الحوت؟',
+                  options: ['رب زدني علماً', 'لا إله إلا أنت سبحانك إني كنت من الظالمين', 'الحمد لله رب العالمين'],
+                  answer: 1
+                }
+              ]
+            }
+          ]
+        }
+      },
+      assignmentsList: [
+        { id: 'hw-1', subjectId: 'arabic', title: 'واجب الحروف والحركات', desc: 'اكتب 3 كلمات تبدأ بحروف مفتوحة ومضمومة ومكسورة.', points: 3 },
+        { id: 'hw-2', subjectId: 'math', title: 'تحدي الأشكال الهندسية', desc: 'ارسم مربعاً ومثلثاً واذكر عدد أضلاع كل شكل.', points: 3 },
+        { id: 'hw-3', subjectId: 'english', title: 'نطق 5 كلمات إنجليزية', desc: 'استمع إلى 5 كلمات في قسم الإنجليزية وكرر نطقها.', points: 3 },
+        { id: 'hw-4', subjectId: 'islamic', title: 'حفظ أذكار الصباح والطعام', desc: 'راجع أذكار الطعام والصباح مع والديك.', points: 3 }
+      ],
+      gamesCatalog: [
+        { id: 'g-unscramble', title: 'لعبة ترتيب الحروف', desc: 'رتّب الحروف المبعثرة لتكوين الكلمة العربية الصحيحة.', icon: '🔤', color: 'teal', minPoints: 0, active: true },
+        { id: 'g-wordbuild', title: 'لعبة تكوين الكلمات', desc: 'اختر الحروف المناسبة من اللوحة لتكوين أكبر عدد من الكلمات.', icon: '🧩', color: 'emerald', minPoints: 0, active: true },
+        { id: 'g-math', title: 'لعبة العمليات الحسابية', desc: 'أجب عن المسائل الحسابية بسرعة واجمع النقاط المتتالية.', icon: '🧮', color: 'gold', minPoints: 0, active: true },
+        { id: 'g-memory', title: 'لعبة الذاكرة', desc: 'اقلب البطاقات وطابق كل صورة بالكلمة المناسبة لها.', icon: '🃏', color: 'purple', minPoints: 10, active: true },
+        { id: 'g-trivia', title: 'لعبة اختيار الإجابة الصحيحة', desc: 'تحدي المعلومات العامة في جميع المواد الدراسية.', icon: '🎯', color: 'sky', minPoints: 10, active: true },
+        { id: 'g-english', title: 'لعبة الكلمات الإنجليزية', desc: 'استمع للكلمة الإنجليزية وطابقها بالصورة الصحيحة.', icon: '🎧', color: 'indigo', minPoints: 15, active: true }
+      ],
+      storyShelf: [
+        {
+          id: 'st-1',
+          title: 'سر البستان الأخضر',
+          category: 'قصص تحفز على الاجتهاد',
+          age: '6 - 10 سنوات',
+          rewardStars: 2,
+          theme: 'garden',
+          pages: [
+            'في قرية هادئة، حصل الطفل كريم على بذرة صغيرة من جده، وقال له الجد: «هذه البذرة تحتاج إلى الصبر والرعاية كل يوم لتكبر وتثمر».',
+            'كان كريم يسقي البذرة كل صباح قبل أن يذهب إلى مدرسته، ويراقب أوراقها الخضراء وهي تنمو شيئاً فشيئاً تماماً مثل دروسه اليومية.',
+            'بعد أسابيع قليلة، أصبحت البذرة شجرة صغيرة مزهرة! أدرك كريم أن المذاكرة والاجتهاد كل يوم يصنعان نجاحاً كبيراً في النهاية.'
+          ]
+        },
+        {
+          id: 'st-2',
+          title: 'أمانة الراعي الصغير',
+          category: 'قصص عن الأخلاق',
+          age: '6 - 11 سنوات',
+          rewardStars: 2,
+          theme: 'mosque',
+          pages: [
+            'كان الفتى الصغير طارق يرعى الأغنام في المراعي الخضراء، ويحرص على ألا تقترب من مزارع الجيران أبداً.',
+            'مرّ به مسافر وطلب أن يشتري منه شاة، فقال طارق بأدب: «هذه الأغنام أمانة عندي لصاحبها، ولا أملك بيعها».',
+            'ابتسم المسافر وأُعجب بأمانة طارق وصدقه، فالأمانة صفة يحبها الله ورسوله وتجعل صاحبها محل ثقة الجميع.'
+          ]
+        },
+        {
+          id: 'st-3',
+          title: 'سفينة سيدنا نوح عليه السلام',
+          category: 'قصص الأنبياء',
+          age: '7 - 12 سنوات',
+          rewardStars: 3,
+          theme: 'stars',
+          pages: [
+            'دعا نبي الله نوح عليه السلام قومه إلى عبادة الله وحده لا شريك له، وصبر على دعوتهم سنين طويلة بكل حكمة.',
+            'أوحى الله إلى سيدنا نوح أن يصنع سفينة كبيرة، وأن يحمل فيها من آمن معه ومن كل زوجين اثنين من المخلوقات.',
+            'وعندما جاء الطوفان، حفظ الله السفينة برحمته ونجّى المؤمنين، لنتعلم أن طاعة الله والصبر هما طريق النجاة.'
+          ]
+        },
+        {
+          id: 'st-4',
+          title: 'مغامرة في مكتبة الأرقام',
+          category: 'قصص تعليمية',
+          age: '6 - 9 سنوات',
+          rewardStars: 2,
+          theme: 'library',
+          pages: [
+            'دخلت ليلى مكتبة المدرسة فوجدت كتاباً يتحدث عن الأرقام وكيف تساعدنا في تنظيم حياتنا ومعرفة الوقت وحساب النقود.',
+            'ساعدت ليلى أمين المكتبة في ترتيب 20 كتاباً على 4 رفوف بالتساوي، فوضعت 5 كتب على كل رف بذكاء وسرعة.',
+            'شكرها أمين المكتبة ومنحها وسام القارئة الذكية، فأحبت ليلى الرياضيات والقراءة معاً.'
+          ]
+        }
+      ],
+      arenaContests: [
+        {
+          id: 'cmp-1',
+          title: 'مسابقة نبتة الأسبوعية الكبرى',
+          category: 'مسابقات أسبوعية',
+          startDate: '2026-11-15',
+          endDate: '2026-11-22',
+          questionCount: 5,
+          isPaid: false,
+          fee: 0,
+          prize: 'وسام نجم الأسبوع + 15 نقطة إضافية',
+          details: 'مسابقة تفاعلية شاملة في اللغة العربية والرياضيات متاحة مجاناً لجميع أبطال نبتة.',
+          questions: [
+            { q: 'ما جمع كلمة (قَلَم)؟', options: ['أَقْلَام', 'قَلَمَان', 'قُلُوم'], answer: 0 },
+            { q: 'كم يساوي: 6 × 3 ؟', options: ['16', '18', '21'], answer: 1 },
+            { q: 'ما معنى كلمة (Book)؟', options: ['قلم', 'كتاب', 'حقيبة'], answer: 1 }
+          ]
+        },
+        {
+          id: 'cmp-2',
+          title: 'تحدي أبطال الرياضيات والحساب الذهني',
+          category: 'مسابقات رياضيات',
+          startDate: '2026-11-16',
+          endDate: '2026-11-25',
+          questionCount: 5,
+          isPaid: true,
+          fee: 25,
+          prize: 'شهادة تفوق مطبوعة + طقم أدوات رسم وهدايا تعليمية',
+          details: 'مسابقة متقدمة لتنمية مهارات الحساب الذهني وحل المسائل، تتوفر بمشاركة مجانية تدريبية أو اشتراك رمزي للجوائز العينية بعد موافقة ولي الأمر.',
+          questions: [
+            { q: 'كم ضلعاً للمربع؟', options: ['3', '4', '5'], answer: 1 },
+            { q: 'ما ناتج: 25 + 15 = ؟', options: ['30', '40', '45'], answer: 1 },
+            { q: 'نصف العدد 16 هو:', options: ['6', '7', '8'], answer: 2 }
+          ]
+        },
+        {
+          id: 'cmp-3',
+          title: 'مسابقة السيرة النبوية والأخلاق',
+          category: 'مسابقات دينية',
+          startDate: '2026-11-14',
+          endDate: '2026-11-24',
+          questionCount: 4,
+          isPaid: false,
+          fee: 0,
+          prize: 'شارة سفير الأخلاق + 10 نقاط',
+          details: 'اختبر معلوماتك في السيرة النبوية والأذكار والآداب الإسلامية.',
+          questions: [
+            { q: 'ماذا نقول عند العطاس؟', options: ['الحمد لله', 'أستغفر الله', 'سبحان الله'], answer: 0 },
+            { q: 'لُقِّب النبي ﷺ قبل البعثة بـ:', options: ['الصادق الأمين', 'الفارس', 'الحكيم'], answer: 0 }
+          ]
+        },
+        {
+          id: 'cmp-4',
+          title: 'أولمبياد اللغتين العربية والإنجليزية',
+          category: 'مسابقات اللغة العربية والإنجليزية',
+          startDate: '2026-11-17',
+          endDate: '2026-11-28',
+          questionCount: 6,
+          isPaid: true,
+          fee: 30,
+          prize: 'ميدالية التميز اللغوي + مجموعة قصص مصورة',
+          details: 'تحدي القراءة والمفردات باللغتين العربية والإنجليزية مع جوائز للفائزين الأوائل.',
+          questions: [
+            { q: 'اختر الكلمة الإنجليزية التي تعني (شمس):', options: ['Moon', 'Sun', 'Star'], answer: 1 },
+            { q: 'كلمة (مدرسة) هي اسم:', options: ['مذكر', 'مؤنث', 'فعل'], answer: 1 }
+          ]
+        }
+      ],
+      leaderboard: [
+        { name: 'آدم محمود', points: 15, badge: 'بطل الحروف', avatar: 'lion' },
+        { name: 'سلمى كريم', points: 10, badge: 'عبقري الأرقام', avatar: 'flower' },
+        { name: 'يوسف طارق', points: 25, badge: 'نجم نبتة الذهبي', avatar: 'astronaut' },
+        { name: 'مريم هاني', points: 20, badge: 'قارئة نهمة', avatar: 'bunny' }
+      ],
+      paymentConfig: {
+        methodName: 'فودافون كاش / إنستا باي (Vodafone Cash & InstaPay)',
+        walletNumber: '01098765432',
+        accountHolder: 'مؤسسة نبتة التعليمية للأطفال',
+        instructions: 'يرجى تحويل رسوم الاشتراك بعد مراجعة تفاصيل المسابقة، ثم الضغط على زر الموافقة لتفعيل مشاركة طفلك فوراً.'
+      },
+      parentApprovalQueue: [
+        {
+          id: 'req-101',
+          studentId: 'stu-1',
+          studentName: 'آدم محمود',
+          contestId: 'cmp-2',
+          contestTitle: 'تحدي أبطال الرياضيات والحساب الذهني',
+          fee: 25,
+          prize: 'شهادة تفوق مطبوعة + طقم أدوات رسم وهدايا تعليمية',
+          status: 'pending',
+          requestedAt: '2026-11-16'
+        }
+      ]
+    };
+
+    let nabtaState = JSON.parse(JSON.stringify(initialNabtaData));
+    let currentRoute = 'welcome';
+    let selectedSubjectId = 'arabic';
+    let selectedLevelId = null;
+    let selectedStoryCategory = 'الكل';
+    let activeStoryId = null;
+    let activeStoryPage = 0;
+    let activeGameId = null;
+    let activeContestQuiz = null;
+    let selectedParentStudentId = 'stu-1';
+    let adminSessionToken = null;
+    let activeAdminTab = 'overview';
+
+    function persistState() {
+      syncLeaderboardWithStudents();
+      if (window.nabtaCloud && window.nabtaCloud.ready) {
+        window.nabtaCloud.pushState(nabtaState);
+      }
+      refreshHeaderBar();
+    }
+
+    window.applyCloudSnapshot = function(cloudDoc) {
+      if (!cloudDoc || !cloudDoc.payload) return;
+      try {
+        const parsed = JSON.parse(cloudDoc.payload);
+        if (parsed && parsed.students && parsed.curriculumTracks) {
+          nabtaState = parsed;
+          refreshHeaderBar();
+          renderCurrentRoute();
+        }
+      } catch (e) {
+        console.warn('Snapshot parse ignored');
+      }
+    };
+
+    function syncLeaderboardWithStudents() {
+      nabtaState.students.forEach(stu => {
+        const existing = nabtaState.leaderboard.find(item => item.name === stu.name);
+        if (existing) {
+          existing.points = stu.points;
+          existing.avatar = stu.avatar;
+          existing.badge = stu.badges[stu.badges.length - 1] || 'بطل نبتة';
+        } else {
+          nabtaState.leaderboard.push({
+            name: stu.name,
+            points: stu.points,
+            avatar: stu.avatar,
+            badge: stu.badges[0] || 'مكتشف جديد'
+          });
+        }
+      });
+      nabtaState.leaderboard.sort((a, b) => b.points - a.points);
+    }
+
+    function getActiveStudent() {
+      return nabtaState.students.find(s => s.id === nabtaState.activeStudentId) || nabtaState.students[0];
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const colors = {
+        success: 'bg-teal-700 text-white border-teal-500',
+        gold: 'bg-amber-500 text-slate-950 border-amber-300',
+        info: 'bg-sky-700 text-white border-sky-500',
+        error: 'bg-rose-600 text-white border-rose-400'
+      };
+      const el = document.createElement('div');
+      el.className = `pointer-events-auto px-4 py-3 rounded-2xl border shadow-lg font-bold text-sm flex items-center gap-2 animate-pop ${colors[type] || colors.success}`;
+      el.innerHTML = `<span>${message}</span>`;
+      container.appendChild(el);
+      setTimeout(() => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+        el.style.transition = 'all 0.25s ease';
+        setTimeout(() => el.remove(), 260);
+      }, 3400);
+    }
+
+    function openModal(htmlContent) {
+      const overlay = document.getElementById('modalOverlay');
+      const box = document.getElementById('modalBox');
+      box.innerHTML = htmlContent;
+      overlay.classList.remove('hidden');
+      overlay.classList.add('flex');
+    }
+
+    function closeModal() {
+      const overlay = document.getElementById('modalOverlay');
+      overlay.classList.add('hidden');
+      overlay.classList.remove('flex');
+    }
+
+    document.getElementById('modalOverlay').addEventListener('click', (e) => {
+      if (e.target.id === 'modalOverlay') closeModal();
+    });
+
+    function speakEnglishText(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast('متصفحك لا يدعم النطق الصوتي الآلي', 'info');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = 0.88;
+      utterance.pitch = 1.08;
+      window.speechSynthesis.speak(utterance);
+      showToast(`🔊 جاري نطق: "${text}"`, 'info');
+    }
+
+    function toggleInterfaceLang() {
+      nabtaState.lang = nabtaState.lang === 'ar' ? 'en' : 'ar';
+      const isEn = nabtaState.lang === 'en';
+      document.documentElement.dir = isEn ? 'ltr' : 'rtl';
+      document.documentElement.lang = isEn ? 'en' : 'ar';
+      document.getElementById('langToggleBtn').textContent = isEn ? 'عربي' : 'EN';
+      document.getElementById('headerTagline').textContent = isEn
+        ? 'Learn, play, create, and grow with knowledge.'
+        : 'نتعلم، نلعب، نبدع، ونكبر بالعلم.';
+      showToast(isEn ? 'Interface switched to English preview mode (RTL ready)' : 'تم العودة للواجهة العربية الكاملة', 'info');
+      renderCurrentRoute();
+    }
+
+    function toggleMobileDrawer() {
+      document.getElementById('mobileDrawer').classList.toggle('hidden');
+    }
+
+    function refreshHeaderBar() {
+      const student = getActiveStudent();
+      document.getElementById('brandLogoSlot').innerHTML = svgArtwork.logoMark(28);
+      document.getElementById('footerLogoSlot').innerHTML = svgArtwork.logoMark(22);
+      if (student) {
+        document.getElementById('headerAvatarMini').innerHTML = svgArtwork.avatars[student.avatar] || svgArtwork.avatars.lion;
+        document.getElementById('headerStudentName').textContent = student.name;
+        document.getElementById('headerPoints').textContent = student.points;
+        document.getElementById('headerPointsMobile').textContent = `${student.points} ⭐`;
+      }
+      document.querySelectorAll('.nav-pill').forEach(btn => {
+        const isMatch = btn.dataset.nav === currentRoute;
+        btn.className = isMatch
+          ? 'nav-pill px-3.5 py-2 rounded-xl text-sm font-extrabold bg-teal-600 text-white shadow-sm transition-all'
+          : 'nav-pill px-3.5 py-2 rounded-xl text-sm font-bold text-slate-600 hover:text-teal-700 hover:bg-white transition-all';
+      });
+    }
+
+    function navigateView(route, extra = {}) {
+      currentRoute = route;
+      if (extra.subjectId) {
+        selectedSubjectId = extra.subjectId;
+        selectedLevelId = null;
+      }
+      if (extra.levelId) {
+        selectedLevelId = extra.levelId;
+      }
+      activeStoryId = null;
+      activeGameId = null;
+      activeContestQuiz = null;
+      refreshHeaderBar();
+      renderCurrentRoute();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function calculateStudentProgress(student) {
+      let totalLevels = 0;
+      Object.values(nabtaState.curriculumTracks).forEach(track => {
+        totalLevels += track.levels.length;
+      });
+      if (totalLevels === 0) return 0;
+      const done = student.completedLevels.length;
+      return Math.min(100, Math.round((done / totalLevels) * 100));
+    }
+
+    function triggerLevelCelebration(levelTitle, alreadyCompleted) {
+      const student = getActiveStudent();
+      if (!alreadyCompleted) {
+        student.points += 5;
+        student.stars += 2;
+        if (student.points >= 20 && !student.badges.includes('نجم نبتة المتألق')) {
+          student.badges.push('نجم نبتة المتألق');
+        }
+        student.achievementsLog.unshift({
+          title: `إتمام ${levelTitle}`,
+          points: 5,
+          date: new Date().toISOString().slice(0, 10)
+        });
+        persistState();
+      }
+
+      const congratsMessage = alreadyCompleted
+        ? `أحسنت يا ${student.name}! 🎉 لقد راجعت ${levelTitle} بنجاح وحافظت على تفوقك.`
+        : `مبروك! 🎉 لقد أكملت ${levelTitle} وحصلت على 5 نقاط.`;
+
+      openModal(`
+        <div class="text-center space-y-5 py-2">
+          <div class="w-24 h-24 mx-auto animate-star">${svgArtwork.sproutMascot(96)}</div>
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-100 text-amber-800 font-extrabold text-sm">
+            <span>⭐ إنجاز جديد</span>
+            <span>•</span>
+            <span>رصيدك الآن: ${student.points} نقطة</span>
+          </div>
+          <h3 class="text-2xl md:text-3xl font-black text-slate-900 leading-snug">${congratsMessage}</h3>
+          <p class="text-slate-600 font-story text-base">تم فتح المستوى التالي في رحلتك التعليمية وحفظ تقدمك في حسابك.</p>
+          <div class="pt-2 flex flex-wrap justify-center gap-3">
+            <button onclick="closeModal(); renderCurrentRoute();" class="btn-tactile btn-teal px-6 py-3 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold">
+              متابعة التعلم 🚀
+            </button>
+            <button onclick="closeModal(); navigateView('games');" class="btn-tactile btn-gold px-6 py-3 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-extrabold">
+              العب واجمع نقاطاً 🎮
+            </button>
+          </div>
+        </div>
+      `);
+    }
+
+    function renderWelcomeView() {
+      const student = getActiveStudent();
+      const progressPct = calculateStudentProgress(student);
+
+      return `
+        <section class="hero-pattern border-b border-slate-200/70">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
+              <div class="lg:col-span-7 space-y-6 text-right">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-50 border border-teal-200 text-teal-800 font-extrabold text-xs sm:text-sm">
+                  <span>🌱 نَبْتَة | NABTA</span>
+                  <span>—</span>
+                  <span>نتعلم، نلعب، نبدع، ونكبر بالعلم.</span>
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight">
+                  أهلاً بك في عالم نبتة! 🌱
+                </h1>
+
+                <div class="bg-white/90 backdrop-blur rounded-3xl p-6 sm:p-7 border-2 border-teal-100 shadow-sm space-y-3 font-story text-slate-700 text-base sm:text-lg leading-relaxed">
+                  <p>
+                    كان هناك طفل صغير يحب اكتشاف العالم، لكنه كان يجد المذاكرة صعبة أحياناً. وفي يوم اكتشف عالم نبتة، المكان الذي تتحول فيه الدروس إلى مغامرات، والواجبات إلى تحديات، والنجاح إلى نجوم ومكافآت!
+                  </p>
+                  <p class="font-bold text-teal-700">ومن هنا بدأت رحلتنا.</p>
+                  <p>
+                    نحن فريق نبتة، نسعى إلى تقديم تجربة تعليمية ممتعة للأطفال، تساعدهم على تعلم اللغة العربية والإنجليزية والرياضيات والتعاليم الدينية، من خلال الدروس والقصص والألعاب والمسابقات.
+                  </p>
+                  <p class="font-bold text-slate-900">
+                    هدفنا أن نجعل كل طفل يحب التعلم، ويكتشف قدراته، ويتقدم خطوة جديدة كل يوم.
+                  </p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-3 pt-1">
+                  <button onclick="navigateView('subjects')" class="btn-tactile btn-teal px-7 py-4 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-black text-base sm:text-lg flex items-center gap-2">
+                    <span>ابدأ رحلتك التعليمية</span>
+                    <span>🚀</span>
+                  </button>
+                  <button onclick="navigateView('games')" class="btn-tactile btn-gold px-6 py-4 rounded-2xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-extrabold text-base flex items-center gap-2">
+                    <span>منطقة الألعاب</span>
+                    <span>🎮</span>
+                  </button>
+                  <button onclick="navigateView('stories')" class="btn-tactile btn-sky px-6 py-4 rounded-2xl bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-base flex items-center gap-2">
+                    <span>مكتبة القصص</span>
+                    <span>📖</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="lg:col-span-5">
+                <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-amber-200/80 shadow-xl relative overflow-hidden">
+                  <div class="flex items-center justify-between gap-4 mb-6">
+                    <div>
+                      <span class="text-xs font-extrabold text-amber-700 bg-amber-100 px-3 py-1 rounded-full">بطاقة المستكشف النشط</span>
+                      <h2 class="text-2xl font-black text-slate-900 mt-2">مرحباً يا ${student.name}!</h2>
+                      <p class="text-xs font-bold text-slate-500">${student.grade}</p>
+                    </div>
+                    <div class="animate-sprout shrink-0">
+                      ${svgArtwork.sproutMascot(94)}
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-3 gap-3 mb-6">
+                    <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 text-center">
+                      <div class="text-2xl font-black text-amber-600">${student.points}</div>
+                      <div class="text-xs font-bold text-slate-600">النقاط</div>
+                    </div>
+                    <div class="bg-teal-50 border border-teal-200 rounded-2xl p-3 text-center">
+                      <div class="text-2xl font-black text-teal-600">${student.stars} ⭐</div>
+                      <div class="text-xs font-bold text-slate-600">النجوم</div>
+                    </div>
+                    <div class="bg-purple-50 border border-purple-200 rounded-2xl p-3 text-center">
+                      <div class="text-2xl font-black text-purple-600">${student.badges.length} 🏅</div>
+                      <div class="text-xs font-bold text-slate-600">الشارات</div>
+                    </div>
+                  </div>
+
+                  <div class="space-y-2 mb-6">
+                    <div class="flex justify-between text-xs font-extrabold">
+                      <span class="text-slate-600">نسبة التقدم في المستويات</span>
+                      <span class="text-teal-700">${progressPct}%</span>
+                    </div>
+                    <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
+                      <div class="h-full bg-gradient-to-l from-teal-500 to-amber-400 rounded-full transition-all duration-500" style="width: ${progressPct}%"></div>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-3 gap-2 pt-2 border-t border-slate-100">
+                    <button onclick="navigateView('profile')" class="p-2.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-800 font-extrabold text-xs text-center transition-colors">
+                      حساب الطالب
+                    </button>
+                    <button onclick="navigateView('parent')" class="p-2.5 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-800 font-extrabold text-xs text-center transition-colors">
+                      ولي الأمر
+                    </button>
+                    <button onclick="navigateView('admin')" class="p-2.5 rounded-xl bg-purple-50 hover:bg-purple-100 text-purple-800 font-extrabold text-xs text-center transition-colors">
+                      لوحة الإدارة
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
+            <div>
+              <span class="text-xs font-extrabold text-teal-700 bg-teal-50 px-3 py-1 rounded-full">مسارات التعلم التفاعلية</span>
+              <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-2">اختر مادتك المفضلة وابدأ المغامرة</h2>
+            </div>
+            <button onclick="navigateView('subjects')" class="text-sm font-extrabold text-teal-700 hover:text-teal-800">عرض جميع المستويات ←</button>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            ${Object.values(nabtaState.curriculumTracks).map(track => {
+              const completedInTrack = track.levels.filter(l => student.completedLevels.includes(l.id)).length;
+              return `
+                <div onclick="navigateView('subjects', { subjectId: '${track.id}' })" class="cursor-pointer bg-white rounded-3xl p-6 border-2 border-slate-100 hover:border-teal-300 card-lift flex flex-col justify-between">
+                  <div>
+                    <div class="w-14 h-14 rounded-2xl bg-gradient-to-br ${track.headerGrad} text-white text-2xl flex items-center justify-center shadow-md mb-4">
+                      ${track.icon}
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">${track.title}</h3>
+                    <p class="text-sm text-slate-600 font-story leading-relaxed mb-4">${track.subtitle}</p>
+                  </div>
+                  <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <span class="text-xs font-extrabold px-3 py-1 rounded-full ${track.badgeBg}">
+                      ${completedInTrack} / ${track.levels.length} مستويات
+                    </span>
+                    <span class="text-sm font-black text-teal-700">ادخل القسم ←</span>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8">
+          <div class="grid md:grid-cols-3 gap-6">
+            <div onclick="navigateView('games')" class="cursor-pointer rounded-3xl p-6 bg-gradient-to-br from-amber-400 to-orange-400 text-slate-950 card-lift shadow-md">
+              <div class="text-3xl mb-3">🎮</div>
+              <h3 class="text-xl font-black mb-1">6 ألعاب تعليمية تفاعلية</h3>
+              <p class="text-sm font-bold text-slate-900/80 mb-4">ترتيب الحروف، تكوين الكلمات، الذاكرة، والحساب السريع.</p>
+              <span class="inline-block bg-white/90 px-4 py-1.5 rounded-xl text-xs font-black">العب الآن ←</span>
+            </div>
+
+            <div onclick="navigateView('stories')" class="cursor-pointer rounded-3xl p-6 bg-gradient-to-br from-sky-500 to-blue-600 text-white card-lift shadow-md">
+              <div class="text-3xl mb-3">📖</div>
+              <h3 class="text-xl font-black mb-1">مكتبة القصص المصورة</h3>
+              <p class="text-sm font-semibold text-sky-100 mb-4">قصص الأنبياء، الأخلاق، والاجتهاد مع تتبع التقدم في القراءة.</p>
+              <span class="inline-block bg-white text-sky-800 px-4 py-1.5 rounded-xl text-xs font-black">اقرأ قصة ←</span>
+            </div>
+
+            <div onclick="navigateView('competitions')" class="cursor-pointer rounded-3xl p-6 bg-gradient-to-br from-purple-600 to-indigo-600 text-white card-lift shadow-md">
+              <div class="text-3xl mb-3">🏆</div>
+              <h3 class="text-xl font-black mb-1">المسابقات ولوحة الأبطال</h3>
+              <p class="text-sm font-semibold text-purple-100 mb-4">شارك مجاناً أو اطلب موافقة ولي الأمر لمسابقات الجوائز.</p>
+              <span class="inline-block bg-white text-purple-800 px-4 py-1.5 rounded-xl text-xs font-black">استكشف المسابقات ←</span>
+            </div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderSubjectsView() {
+      const student = getActiveStudent();
+      const tracks = Object.values(nabtaState.curriculumTracks);
+      const activeTrack = nabtaState.curriculumTracks[selectedSubjectId] || tracks[0];
+
+      if (selectedLevelId) {
+        const levelIndex = activeTrack.levels.findIndex(l => l.id === selectedLevelId);
+        const level = activeTrack.levels[levelIndex];
+        if (level) {
+          return renderLevelWorkspace(activeTrack, level, levelIndex);
+        }
+      }
+
+      const subjectHomework = nabtaState.assignmentsList.filter(hw => hw.subjectId === activeTrack.id);
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          <div class="flex flex-wrap gap-3">
+            ${tracks.map(t => {
+              const isSelected = t.id === activeTrack.id;
+              return `
+                <button onclick="selectedSubjectId='${t.id}'; selectedLevelId=null; renderCurrentRoute();"
+                  class="px-5 py-3.5 rounded-2xl font-black text-sm sm:text-base flex items-center gap-2.5 transition-all ${isSelected ? `bg-gradient-to-l ${t.headerGrad} text-white shadow-lg scale-[1.02]` : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'}">
+                  <span class="text-xl">${t.icon}</span>
+                  <span>${t.title}</span>
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          <div class="rounded-3xl p-6 sm:p-8 bg-gradient-to-l ${activeTrack.headerGrad} text-white shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="space-y-2">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 text-xs font-extrabold">
+                <span>${activeTrack.icon}</span>
+                <span>منهج تفاعلي متدرج</span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl font-black">${activeTrack.title}</h1>
+              <p class="text-white/90 font-story text-base max-w-2xl">${activeTrack.subtitle}</p>
+            </div>
+            <div class="bg-white/15 backdrop-blur-sm rounded-2xl p-4 text-center shrink-0">
+              <div class="text-xs font-bold text-white/90">مكافأة إتمام كل مستوى</div>
+              <div class="text-2xl font-black mt-1">+5 نقاط ⭐</div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <h2 class="text-xl font-black text-slate-900">خارطة المستويات التعليمية</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+              ${activeTrack.levels.map((lvl, idx) => {
+                const isCompleted = student.completedLevels.includes(lvl.id);
+                const prevLevel = idx > 0 ? activeTrack.levels[idx - 1] : null;
+                const isUnlocked = idx === 0 || isCompleted || (prevLevel && student.completedLevels.includes(prevLevel.id));
+
+                return `
+                  <div class="bg-white rounded-3xl p-6 border-2 ${isCompleted ? 'border-teal-400' : isUnlocked ? 'border-amber-300' : 'border-slate-200 opacity-75'} shadow-sm flex flex-col justify-between">
+                    <div>
+                      <div class="flex items-center justify-between gap-2 mb-3">
+                        <span class="px-3 py-1 rounded-full text-xs font-extrabold ${isCompleted ? 'bg-teal-100 text-teal-800' : isUnlocked ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'}">
+                          ${isCompleted ? '✅ مكتمل (+5 نقاط)' : isUnlocked ? '🔓 متاح الآن' : '🔒 مغلق (أكمل المستوى السابق)'}
+                        </span>
+                        <span class="text-xs font-bold text-slate-500">${lvl.lessons.length} دروس + اختبار</span>
+                      </div>
+                      <h3 class="text-xl font-black text-slate-900 mb-2">${lvl.title}</h3>
+                      <p class="text-sm text-slate-600 font-story mb-4">${lvl.description}</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+                      <div class="text-xs font-bold text-slate-500">
+                        الاختبار: ${lvl.quiz.length} أسئلة تفاعلية
+                      </div>
+                      ${isUnlocked
+                        ? `<button onclick="selectedLevelId='${lvl.id}'; renderCurrentRoute();" class="btn-tactile btn-teal px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm">
+                            ${isCompleted ? 'مراجعة المستوى' : 'ابدأ المستوى 🚀'}
+                          </button>`
+                        : `<button disabled class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-400 font-extrabold text-sm cursor-not-allowed">
+                            مغلق حالياً 🔒
+                          </button>`
+                      }
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-black text-slate-900">📝 الواجبات والتدريبات المنزلية للقسم</h3>
+              <span class="text-xs font-extrabold text-amber-700 bg-amber-50 px-3 py-1 rounded-full">+3 نقاط لكل واجب</span>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-4">
+              ${subjectHomework.map(hw => {
+                const done = student.completedHomework.includes(hw.id);
+                return `
+                  <div class="p-4 rounded-2xl border ${done ? 'bg-teal-50/60 border-teal-200' : 'bg-slate-50 border-slate-200'} flex items-center justify-between gap-4">
+                    <div>
+                      <h4 class="font-extrabold text-slate-900 text-sm">${hw.title}</h4>
+                      <p class="text-xs text-slate-600 mt-1">${hw.desc}</p>
+                    </div>
+                    ${done
+                      ? `<span class="px-3 py-1.5 rounded-xl bg-teal-600 text-white text-xs font-extrabold shrink-0">تم التسليم ✓</span>`
+                      : `<button onclick="completeHomeworkTask('${hw.id}')" class="btn-tactile btn-gold px-4 py-2 rounded-xl bg-amber-400 text-slate-950 text-xs font-black shrink-0">إتمام الواجب</button>`
+                    }
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function completeHomeworkTask(hwId) {
+      const student = getActiveStudent();
+      const hw = nabtaState.assignmentsList.find(h => h.id === hwId);
+      if (!hw || student.completedHomework.includes(hwId)) return;
+      student.completedHomework.push(hwId);
+      student.points += hw.points;
+      student.stars += 1;
+      student.achievementsLog.unshift({
+        title: `إتمام واجب: ${hw.title}`,
+        points: hw.points,
+        date: new Date().toISOString().slice(0, 10)
+      });
+      persistState();
+      showToast(`أحسنت! تم تسليم الواجب وحصلت على +${hw.points} نقاط ⭐`, 'success');
+      renderCurrentRoute();
+    }
+
+    function renderLevelWorkspace(track, level, levelIndex) {
+      const student = getActiveStudent();
+      const isCompleted = student.completedLevels.includes(level.id);
+
+      return `
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          <div class="flex items-center justify-between gap-4">
+            <button onclick="selectedLevelId=null; renderCurrentRoute();" class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 font-extrabold text-sm text-slate-700 flex items-center gap-2">
+              <span>→</span>
+              <span>العودة إلى ${track.title}</span>
+            </button>
+            <span class="px-3.5 py-1.5 rounded-full text-xs font-extrabold ${track.badgeBg}">
+              ${isCompleted ? '✅ مستوى مكتمل' : '🎯 قيد التعلم'}
+            </span>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-slate-100 shadow-sm space-y-6">
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-black text-slate-900">${level.title}</h1>
+              <p class="text-slate-600 font-story mt-1">${level.description}</p>
+            </div>
+
+            <div class="space-y-6">
+              ${level.lessons.map((lesson, idx) => renderInteractiveLessonCard(lesson, idx)).join('')}
+            </div>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-amber-200 shadow-md space-y-6">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+              <div>
+                <span class="text-xs font-extrabold text-amber-700 bg-amber-100 px-3 py-1 rounded-full">اختبار نهاية المستوى</span>
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900 mt-2">أجب عن الأسئلة للحصول على 5 نقاط ⭐</h2>
+              </div>
+            </div>
+
+            <form id="levelQuizForm" onsubmit="submitLevelQuiz(event, '${track.id}', '${level.id}')" class="space-y-5">
+              ${level.quiz.map((item, qIdx) => `
+                <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                  <p class="font-black text-slate-900 text-base">${qIdx + 1}. ${item.q}</p>
+                  <div class="grid sm:grid-cols-3 gap-2.5">
+                    ${item.options.map((opt, oIdx) => `
+                      <label class="cursor-pointer flex items-center gap-2.5 p-3 rounded-xl bg-white border border-slate-200 hover:border-teal-400 font-bold text-sm text-slate-800">
+                        <input type="radio" name="q_${qIdx}" value="${oIdx}" required class="w-4 h-4 accent-teal-600" />
+                        <span>${opt}</span>
+                      </label>
+                    `).join('')}
+                  </div>
+                </div>
+              `).join('')}
+
+              <div class="flex justify-end">
+                <button type="submit" class="btn-tactile btn-teal px-8 py-3.5 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-black text-base">
+                  تصحيح الإجابات واستلام المكافأة 🏆
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderInteractiveLessonCard(lesson, idx) {
+      let interactiveHtml = '';
+
+      if (lesson.interactiveType === 'arabic_letters' && lesson.letters) {
+        interactiveHtml = `
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-4">
+            ${lesson.letters.map(l => `
+              <div class="p-4 rounded-2xl bg-teal-50/70 border border-teal-200 text-center space-y-1.5">
+                <div class="text-3xl font-black text-teal-700">${l.char}</div>
+                <div class="text-xs font-extrabold text-slate-800 bg-white rounded-lg py-1 px-2">${l.fatha}</div>
+                <div class="text-xs font-extrabold text-slate-800 bg-white rounded-lg py-1 px-2">${l.damma}</div>
+                <div class="text-xs font-extrabold text-slate-800 bg-white rounded-lg py-1 px-2">${l.kasra}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (lesson.interactiveType === 'word_builder' && lesson.words) {
+        interactiveHtml = `
+          <div class="grid sm:grid-cols-3 gap-3 mt-4">
+            ${lesson.words.map(w => `
+              <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200 text-center space-y-2">
+                <div class="flex justify-center gap-1.5" dir="rtl">
+                  ${w.parts.map(p => `<span class="px-2.5 py-1 rounded-lg bg-white border border-amber-300 font-black text-amber-800">${p}</span>`).join('')}
+                </div>
+                <div class="text-xl font-black text-slate-900">= ${w.full}</div>
+                <p class="text-xs text-slate-600 font-semibold">${w.meaning}</p>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (lesson.interactiveType === 'english_speech' && lesson.items) {
+        interactiveHtml = `
+          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3 mt-4">
+            ${lesson.items.map(item => `
+              <button type="button" onclick="speakEnglishText('${item.speak.replace(/'/g, "\\'")}')"
+                class="p-4 rounded-2xl bg-sky-50 hover:bg-sky-100 border-2 border-sky-200 text-right transition-all flex items-center justify-between gap-3 group">
+                <div>
+                  <div class="text-2xl mb-1">${item.emoji}</div>
+                  <div class="font-black text-sky-900 text-base" dir="ltr">${item.word}</div>
+                  <div class="text-xs font-bold text-slate-600">${item.ar}</div>
+                </div>
+                <span class="w-10 h-10 rounded-full bg-sky-600 text-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">🔊</span>
+              </button>
+            `).join('')}
+          </div>
+        `;
+      } else if (lesson.interactiveType === 'math_shapes' && lesson.shapes) {
+        interactiveHtml = `
+          <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-3 mt-4">
+            ${lesson.shapes.map(sh => `
+              <div class="p-4 rounded-2xl bg-amber-50/60 border border-amber-200 text-center space-y-2">
+                ${svgArtwork.shapeSvg(sh.key)}
+                <h4 class="font-black text-slate-900">${sh.name}</h4>
+                <p class="text-xs text-slate-600 leading-relaxed">${sh.info}</p>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } else if (lesson.interactiveType === 'math_sandbox') {
+        interactiveHtml = `
+          <div class="mt-4 p-5 rounded-2xl bg-amber-50 border border-amber-200 flex flex-wrap items-center justify-center gap-3">
+            <input id="mathBoxA" type="number" value="6" min="0" max="50" oninput="updateMathSandbox()" class="w-20 p-2.5 rounded-xl border-2 border-amber-300 text-center font-black text-lg bg-white" />
+            <select id="mathBoxOp" onchange="updateMathSandbox()" class="p-2.5 rounded-xl border-2 border-amber-300 font-black text-lg bg-white">
+              <option value="+">+</option>
+              <option value="-">-</option>
+              <option value="*">×</option>
+            </select>
+            <input id="mathBoxB" type="number" value="4" min="0" max="50" oninput="updateMathSandbox()" class="w-20 p-2.5 rounded-xl border-2 border-amber-300 text-center font-black text-lg bg-white" />
+            <span class="text-2xl font-black text-slate-700">=</span>
+            <span id="mathBoxRes" class="px-5 py-2 rounded-xl bg-teal-600 text-white font-black text-xl">10</span>
+          </div>
+        `;
+      } else if (lesson.pairs) {
+        interactiveHtml = `
+          <div class="grid sm:grid-cols-2 gap-3 mt-4">
+            ${lesson.pairs.map(p => `
+              <div class="p-4 rounded-2xl bg-purple-50/60 border border-purple-200 space-y-1">
+                <div class="font-black text-purple-900 text-sm">${p.rule}</div>
+                <div class="text-sm text-slate-700 font-story leading-relaxed">${p.example}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      return `
+        <div class="p-5 sm:p-6 rounded-2xl bg-slate-50/70 border border-slate-200">
+          <div class="flex items-center gap-2.5 mb-2">
+            <span class="w-8 h-8 rounded-xl bg-teal-600 text-white font-black text-sm flex items-center justify-center">${idx + 1}</span>
+            <h3 class="text-lg font-black text-slate-900">${lesson.title}</h3>
+          </div>
+          <p class="text-sm text-slate-600 font-story leading-relaxed">${lesson.summary}</p>
+          ${interactiveHtml}
+        </div>
+      `;
+    }
+
+    function updateMathSandbox() {
+      const a = Number(document.getElementById('mathBoxA')?.value || 0);
+      const b = Number(document.getElementById('mathBoxB')?.value || 0);
+      const op = document.getElementById('mathBoxOp')?.value || '+';
+      let res = a + b;
+      if (op === '-') res = a - b;
+      if (op === '*') res = a * b;
+      const target = document.getElementById('mathBoxRes');
+      if (target) target.textContent = res;
+    }
+
+    function submitLevelQuiz(e, trackId, levelId) {
+      e.preventDefault();
+      const track = nabtaState.curriculumTracks[trackId];
+      const level = track.levels.find(l => l.id === levelId);
+      const formData = new FormData(e.target);
+
+      let score = 0;
+      level.quiz.forEach((q, idx) => {
+        if (Number(formData.get(`q_${idx}`)) === q.answer) {
+          score++;
+        }
+      });
+
+      const passThreshold = Math.ceil(level.quiz.length * 0.6);
+      if (score >= passThreshold) {
+        const student = getActiveStudent();
+        const alreadyCompleted = student.completedLevels.includes(level.id);
+        if (!alreadyCompleted) {
+          student.completedLevels.push(level.id);
+        }
+        triggerLevelCelebration(level.title, alreadyCompleted);
+      } else {
+        showToast(`حصلت على ${score} من ${level.quiz.length}. حاول مرة أخرى للنجاح في المستوى! 💪`, 'gold');
+      }
+    }
+
+    let gameRuntime = {};
+
+    function renderGamesView() {
+      const student = getActiveStudent();
+
+      if (activeGameId) {
+        return renderActiveGameArena(activeGameId);
+      }
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          <div class="rounded-3xl p-6 sm:p-8 bg-gradient-to-l from-amber-400 via-yellow-400 to-teal-400 text-slate-950 shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <span class="px-3 py-1 rounded-full bg-white/80 text-xs font-black">منطقة الألعاب التعليمية 🎮</span>
+              <h1 class="text-2xl sm:text-3xl font-black mt-2">العب، فكّر، واجمع النقاط!</h1>
+              <p class="text-sm sm:text-base font-bold text-slate-900/80 mt-1">ألعاب آمنة وممتعة تنمّي الذكاء واللغة والحساب. تفتح الألعاب المتقدمة كلما جمعت نقاطاً أكثر!</p>
+            </div>
+            <div class="bg-white rounded-2xl px-5 py-3 shadow-sm text-center shrink-0">
+              <div class="text-xs font-bold text-slate-500">نقاطك الحالية</div>
+              <div class="text-2xl font-black text-amber-600">${student.points} ⭐</div>
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            ${nabtaState.gamesCatalog.filter(g => g.active).map(game => {
+              const isUnlocked = student.points >= game.minPoints;
+              return `
+                <div class="bg-white rounded-3xl p-6 border-2 ${isUnlocked ? 'border-slate-100 hover:border-amber-300 card-lift' : 'border-slate-200 bg-slate-50/80'} flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-4">
+                      <span class="w-14 h-14 rounded-2xl bg-amber-50 border border-amber-200 text-3xl flex items-center justify-center">${game.icon}</span>
+                      <span class="px-3 py-1 rounded-full text-xs font-extrabold ${isUnlocked ? 'bg-teal-100 text-teal-800' : 'bg-amber-100 text-amber-800'}">
+                        ${isUnlocked ? '🔓 متاحة للعب' : `🔒 تفتح عند ${game.minPoints} نقطة`}
+                      </span>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 mb-2">${game.title}</h3>
+                    <p class="text-sm text-slate-600 font-story leading-relaxed mb-5">${game.desc}</p>
+                  </div>
+
+                  <div>
+                    ${isUnlocked
+                      ? `<button onclick="launchEducationalGame('${game.id}')" class="w-full btn-tactile btn-teal py-3 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-black text-sm">
+                          ابدأ اللعب الآن 🚀
+                        </button>`
+                      : `<div class="w-full py-3 px-4 rounded-2xl bg-slate-200/80 text-slate-600 font-extrabold text-xs text-center">
+                          اجمع ${game.minPoints - student.points} نقطة إضافية لفتح هذه اللعبة
+                        </div>`
+                    }
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function awardGameVictory(gameTitle, bonus = 2) {
+      const student = getActiveStudent();
+      student.points += bonus;
+      student.stars += 1;
+      student.achievementsLog.unshift({
+        title: `الفوز في ${gameTitle}`,
+        points: bonus,
+        date: new Date().toISOString().slice(0, 10)
+      });
+      persistState();
+      showToast(`رائع! فزت في ${gameTitle} وحصلت على +${bonus} نقاط ⭐`, 'gold');
+    }
+
+    function launchEducationalGame(gameId) {
+      activeGameId = gameId;
+
+      if (gameId === 'g-unscramble') {
+        const bank = [
+          { target: 'نبتة', clue: 'كائن حي أخضر ينمو بالماء والشمس 🌱' },
+          { target: 'قمر', clue: 'يضيء السماء في الليل 🌙' },
+          { target: 'كتاب', clue: 'نقرأ فيه القصص والمعلومات 📘' },
+          { target: 'مدرسة', clue: 'المكان الذي نتعلم فيه مع أصدقائنا 🏫' }
+        ];
+        const chosen = bank[Math.floor(Math.random() * bank.length)];
+        const letters = chosen.target.split('').map((ch, idx) => ({ id: idx, ch })).sort(() => Math.random() - 0.5);
+        gameRuntime = { target: chosen.target, clue: chosen.clue, pool: letters, picked: [] };
+      } else if (gameId === 'g-wordbuild') {
+        gameRuntime = {
+          tiles: ['م', 'د', 'ر', 'س', 'ة', 'ق', 'ل', 'ب', 'ن'],
+          validWords: ['مدرسة', 'قلم', 'قلب', 'درس', 'قمر', 'نمر', 'بدر', 'سمر'],
+          currentWord: '',
+          found: []
+        };
+      } else if (gameId === 'g-math') {
+        gameRuntime = { score: 0, round: 1, totalRounds: 5, ...generateMathChallenge() };
+      } else if (gameId === 'g-memory') {
+        const pairs = [
+          { pairId: 'sun', label: 'شمس ☀️' },
+          { pairId: 'sun', label: 'Sun' },
+          { pairId: 'book', label: 'كتاب 📘' },
+          { pairId: 'book', label: 'Book' },
+          { pairId: 'star', label: 'نجمة ⭐' },
+          { pairId: 'star', label: 'Star' },
+          { pairId: 'cat', label: 'قطة 🐱' },
+          { pairId: 'cat', label: 'Cat' },
+          { pairId: 'apple', label: 'تفاحة 🍎' },
+          { pairId: 'apple', label: 'Apple' },
+          { pairId: 'tree', label: 'شجرة 🌳' },
+          { pairId: 'tree', label: 'Tree' }
+        ];
+        gameRuntime = {
+          cards: pairs.map((p, idx) => ({ uid: idx, ...p, flipped: false, matched: false })).sort(() => Math.random() - 0.5),
+          selectedUids: [],
+          moves: 0
+        };
+      } else if (gameId === 'g-trivia') {
+        gameRuntime = {
+          idx: 0,
+          score: 0,
+          items: [
+            { q: 'كم عدد أركان الإسلام؟', options: ['أربعة', 'خمسة', 'ستة'], answer: 1 },
+            { q: 'ما جمع كلمة (عُصْفُور)؟', options: ['عَصَافِير', 'عُصْفُورَات', 'عَصْفَر'], answer: 0 },
+            { q: 'ما ناتج: 9 + 6 ؟', options: ['14', '15', '16'], answer: 1 },
+            { q: 'أي كلمة تعني (أزرق) بالإنجليزية؟', options: ['Red', 'Green', 'Blue'], answer: 2 }
+          ]
+        };
+      } else if (gameId === 'g-english') {
+        gameRuntime = {
+          idx: 0,
+          score: 0,
+          items: [
+            { prompt: 'Elephant', emoji: '🐘', options: ['Elephant', 'Lion', 'Duck'], answer: 'Elephant' },
+            { prompt: 'Apple', emoji: '🍎', options: ['Banana', 'Apple', 'Orange'], answer: 'Apple' },
+            { prompt: 'Book', emoji: '📘', options: ['Pen', 'Star', 'Book'], answer: 'Book' },
+            { prompt: 'Star', emoji: '⭐', options: ['Moon', 'Star', 'Sun'], answer: 'Star' }
+          ]
+        };
+      }
+
+      renderCurrentRoute();
+    }
+
+    function generateMathChallenge() {
+      const a = Math.floor(Math.random() * 12) + 2;
+      const b = Math.floor(Math.random() * 10) + 1;
+      const isAdd = Math.random() > 0.35;
+      const ans = isAdd ? a + b : a * b;
+      const opText = isAdd ? `${a} + ${b}` : `${a} × ${b}`;
+      const choices = new Set([ans, ans + 2, Math.max(1, ans - 1)]);
+      while (choices.size < 3) choices.add(ans + Math.floor(Math.random() * 7) + 1);
+      return {
+        question: opText,
+        answer: ans,
+        options: Array.from(choices).sort(() => Math.random() - 0.5)
+      };
+    }
+
+    function renderActiveGameArena(gameId) {
+      const gameMeta = nabtaState.gamesCatalog.find(g => g.id === gameId);
+      let bodyHtml = '';
+
+      if (gameId === 'g-unscramble') {
+        const built = gameRuntime.picked.map(p => p.ch).join('');
+        bodyHtml = `
+          <div class="text-center space-y-6">
+            <div class="p-4 rounded-2xl bg-teal-50 border border-teal-200 inline-block">
+              <span class="text-sm font-extrabold text-teal-800">تلميح الكلمة: ${gameRuntime.clue}</span>
+            </div>
+
+            <div class="flex justify-center gap-2 min-h-[64px]">
+              ${Array.from({ length: gameRuntime.target.length }).map((_, i) => `
+                <div class="w-14 h-14 rounded-2xl border-2 border-dashed border-teal-400 bg-white flex items-center justify-center text-2xl font-black text-teal-800">
+                  ${gameRuntime.picked[i] ? gameRuntime.picked[i].ch : ''}
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="flex justify-center flex-wrap gap-3">
+              ${gameRuntime.pool.map(item => {
+                const used = gameRuntime.picked.some(p => p.id === item.id);
+                return `
+                  <button ${used ? 'disabled' : ''} onclick="pickUnscrambleLetter(${item.id})"
+                    class="w-14 h-14 rounded-2xl font-black text-2xl transition-all ${used ? 'bg-slate-100 text-slate-300' : 'btn-tactile btn-gold bg-amber-400 text-slate-950'}">
+                    ${item.ch}
+                  </button>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="flex justify-center gap-3 pt-2">
+              <button onclick="gameRuntime.picked=[]; renderCurrentRoute();" class="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 font-bold text-sm text-slate-700">مسح الحروف</button>
+              <button onclick="launchEducationalGame('g-unscramble')" class="px-5 py-2.5 rounded-xl bg-sky-100 hover:bg-sky-200 font-bold text-sm text-sky-800">كلمة جديدة 🔄</button>
+            </div>
+            ${built === gameRuntime.target ? `<div class="p-4 rounded-2xl bg-teal-600 text-white font-black text-lg animate-pop">ممتاز! الكلمة هي "${gameRuntime.target}" 🎉</div>` : ''}
+          </div>
+        `;
+      } else if (gameId === 'g-wordbuild') {
+        bodyHtml = `
+          <div class="text-center space-y-6">
+            <p class="text-sm font-bold text-slate-600">اضغط على الحروف لتكوين كلمات عربية صحيحة من اللوحة (مثل: قلم، درس، مدرسة، قلب):</p>
+            <div class="h-14 max-w-xs mx-auto rounded-2xl bg-amber-50 border-2 border-amber-300 flex items-center justify-center text-2xl font-black text-amber-900">
+              ${gameRuntime.currentWord || '...'}
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 max-w-xs mx-auto">
+              ${gameRuntime.tiles.map(ch => `
+                <button onclick="gameRuntime.currentWord += '${ch}'; renderCurrentRoute();"
+                  class="h-14 rounded-2xl btn-tactile btn-teal bg-teal-600 text-white font-black text-2xl">
+                  ${ch}
+                </button>
+              `).join('')}
+            </div>
+
+            <div class="flex justify-center gap-3">
+              <button onclick="verifyBuiltWord()" class="btn-tactile btn-gold px-6 py-2.5 rounded-xl bg-amber-400 text-slate-950 font-black text-sm">تحقق من الكلمة ✓</button>
+              <button onclick="gameRuntime.currentWord=''; renderCurrentRoute();" class="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 font-bold text-sm">مسح</button>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100">
+              <div class="text-xs font-extrabold text-slate-500 mb-2">الكلمات التي كوّنتها (${gameRuntime.found.length}):</div>
+              <div class="flex flex-wrap justify-center gap-2">
+                ${gameRuntime.found.map(w => `<span class="px-3 py-1 rounded-full bg-teal-100 text-teal-800 font-black text-sm">${w} ⭐</span>`).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (gameId === 'g-math') {
+        bodyHtml = `
+          <div class="text-center space-y-6">
+            <div class="flex justify-center gap-4 text-sm font-extrabold">
+              <span class="px-4 py-1.5 rounded-full bg-amber-100 text-amber-800">الجولة ${gameRuntime.round} من ${gameRuntime.totalRounds}</span>
+              <span class="px-4 py-1.5 rounded-full bg-teal-100 text-teal-800">النقاط: ${gameRuntime.score}</span>
+            </div>
+            <div class="text-4xl sm:text-5xl font-black text-slate-900 py-6 bg-slate-50 rounded-3xl border border-slate-200" dir="ltr">
+              ${gameRuntime.question} = ?
+            </div>
+            <div class="grid grid-cols-3 gap-4 max-w-md mx-auto">
+              ${gameRuntime.options.map(opt => `
+                <button onclick="answerMathGame(${opt})" class="btn-tactile btn-sky py-4 rounded-2xl bg-sky-500 hover:bg-sky-600 text-white font-black text-2xl">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (gameId === 'g-memory') {
+        bodyHtml = `
+          <div class="space-y-5">
+            <div class="flex justify-between items-center text-sm font-extrabold">
+              <span class="text-slate-600">طابق كل صورة مع كلمتها الصحيحة</span>
+              <span class="px-3 py-1 rounded-full bg-purple-100 text-purple-800">المحاولات: ${gameRuntime.moves}</span>
+            </div>
+            <div class="grid grid-cols-3 sm:grid-cols-4 gap-3">
+              ${gameRuntime.cards.map(c => `
+                <button onclick="flipMemoryCard(${c.uid})" class="memory-card h-24 sm:h-28 ${c.flipped || c.matched ? 'flipped' : ''} ${c.matched ? 'matched' : ''}">
+                  <div class="memory-inner">
+                    <div class="memory-face bg-gradient-to-br from-purple-600 to-indigo-600 text-white font-black text-2xl shadow-sm">
+                      🌱
+                    </div>
+                    <div class="memory-face memory-back ${c.matched ? 'bg-teal-50 border-2 border-teal-400 text-teal-900' : 'bg-white border-2 border-purple-300 text-slate-900'} font-black text-base sm:text-lg p-2 text-center shadow-sm">
+                      ${c.label}
+                    </div>
+                  </div>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else if (gameId === 'g-trivia' || gameId === 'g-english') {
+        const currentItem = gameRuntime.items[gameRuntime.idx];
+        const isEn = gameId === 'g-english';
+        bodyHtml = `
+          <div class="text-center space-y-6">
+            <div class="flex justify-center gap-3 text-xs font-extrabold">
+              <span class="px-3.5 py-1.5 rounded-full bg-sky-100 text-sky-800">السؤال ${gameRuntime.idx + 1} من ${gameRuntime.items.length}</span>
+              <span class="px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-800">الإجابات الصحيحة: ${gameRuntime.score}</span>
+            </div>
+
+            ${isEn ? `
+              <div class="space-y-3">
+                <div class="text-6xl">${currentItem.emoji}</div>
+                <button onclick="speakEnglishText('${currentItem.prompt}')" class="px-4 py-2 rounded-xl bg-sky-100 hover:bg-sky-200 text-sky-900 font-extrabold text-sm inline-flex items-center gap-2">
+                  <span>🔊 استمع للكلمة</span>
+                </button>
+                <h3 class="text-xl font-black text-slate-900">اختر الكلمة الإنجليزية المطابقة للصورة:</h3>
+              </div>
+            ` : `
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 py-4">${currentItem.q}</h3>
+            `}
+
+            <div class="grid sm:grid-cols-3 gap-3 max-w-xl mx-auto">
+              ${currentItem.options.map((opt, idx) => `
+                <button onclick="answerQuizGame(${isEn ? `'${opt}'` : idx})" class="btn-tactile btn-teal py-3.5 px-4 rounded-2xl bg-teal-600 hover:bg-teal-700 text-white font-black text-base">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+          <div class="flex items-center justify-between">
+            <button onclick="activeGameId=null; renderCurrentRoute();" class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 font-extrabold text-sm text-slate-700">
+              → العودة للألعاب
+            </button>
+            <span class="text-sm font-black text-amber-700 bg-amber-50 px-3.5 py-1.5 rounded-full border border-amber-200">
+              ${gameMeta.icon} ${gameMeta.title}
+            </span>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-slate-100 shadow-lg">
+            ${bodyHtml}
+          </div>
+        </div>
+      `;
+    }
+
+    function pickUnscrambleLetter(id) {
+      const item = gameRuntime.pool.find(p => p.id === id);
+      if (!item || gameRuntime.picked.length >= gameRuntime.target.length) return;
+      gameRuntime.picked.push(item);
+      const built = gameRuntime.picked.map(p => p.ch).join('');
+      if (built === gameRuntime.target) {
+        awardGameVictory('لعبة ترتيب الحروف', 2);
+      }
+      renderCurrentRoute();
+    }
+
+    function verifyBuiltWord() {
+      const word = gameRuntime.currentWord.trim();
+      if (!word) return;
+      if (gameRuntime.validWords.includes(word) && !gameRuntime.found.includes(word)) {
+        gameRuntime.found.push(word);
+        gameRuntime.currentWord = '';
+        awardGameVictory('لعبة تكوين الكلمات', 2);
+      } else if (gameRuntime.found.includes(word)) {
+        showToast('لقد كوّنت هذه الكلمة بالفعل!', 'info');
+        gameRuntime.currentWord = '';
+      } else {
+        showToast('جرّب تكوين كلمة أخرى مثل: قلم، درس، قلب، مدرسة', 'gold');
+        gameRuntime.currentWord = '';
+      }
+      renderCurrentRoute();
+    }
+
+    function answerMathGame(chosen) {
+      if (chosen === gameRuntime.answer) {
+        gameRuntime.score++;
+        showToast('إجابة صحيحة! أحسنت 🎯', 'success');
+      } else {
+        showToast(`الإجابة الصحيحة كانت ${gameRuntime.answer}`, 'info');
+      }
+      if (gameRuntime.round < gameRuntime.totalRounds) {
+        gameRuntime.round++;
+        Object.assign(gameRuntime, generateMathChallenge());
+        renderCurrentRoute();
+      } else {
+        if (gameRuntime.score >= 3) {
+          awardGameVictory('لعبة العمليات الحسابية', 2);
+        }
+        activeGameId = null;
+        renderCurrentRoute();
+      }
+    }
+
+    function flipMemoryCard(uid) {
+      const card = gameRuntime.cards.find(c => c.uid === uid);
+      if (!card || card.flipped || card.matched || gameRuntime.selectedUids.length >= 2) return;
+      card.flipped = true;
+      gameRuntime.selectedUids.push(uid);
+      renderCurrentRoute();
+
+      if (gameRuntime.selectedUids.length === 2) {
+        gameRuntime.moves++;
+        const [firstId, secondId] = gameRuntime.selectedUids;
+        const c1 = gameRuntime.cards.find(c => c.uid === firstId);
+        const c2 = gameRuntime.cards.find(c => c.uid === secondId);
+        if (c1.pairId === c2.pairId) {
+          c1.matched = true;
+          c2.matched = true;
+          gameRuntime.selectedUids = [];
+          if (gameRuntime.cards.every(c => c.matched)) {
+            awardGameVictory('لعبة الذاكرة', 3);
+          }
+          renderCurrentRoute();
+        } else {
+          setTimeout(() => {
+            c1.flipped = false;
+            c2.flipped = false;
+            gameRuntime.selectedUids = [];
+            renderCurrentRoute();
+          }, 750);
+        }
+      }
+    }
+
+    function answerQuizGame(val) {
+      const item = gameRuntime.items[gameRuntime.idx];
+      const correct = val === item.answer;
+      if (correct) {
+        gameRuntime.score++;
+        if (activeGameId === 'g-english') speakEnglishText(item.answer);
+        showToast('إجابة رائعة! ⭐', 'success');
+      } else {
+        showToast('حاول التركيز في السؤال القادم!', 'info');
+      }
+
+      if (gameRuntime.idx + 1 < gameRuntime.items.length) {
+        gameRuntime.idx++;
+        renderCurrentRoute();
+      } else {
+        const title = activeGameId === 'g-english' ? 'لعبة الكلمات الإنجليزية' : 'لعبة اختيار الإجابة الصحيحة';
+        if (gameRuntime.score >= 2) awardGameVictory(title, 2);
+        activeGameId = null;
+        renderCurrentRoute();
+      }
+    }
+
+    function renderStoriesView() {
+      const student = getActiveStudent();
+
+      if (activeStoryId) {
+        const story = nabtaState.storyShelf.find(s => s.id === activeStoryId);
+        if (story) return renderStoryReader(story, student);
+      }
+
+      const categories = ['الكل', 'قصص تعليمية', 'قصص عن الأخلاق', 'قصص الأنبياء', 'قصص تحفز على الاجتهاد'];
+      const filtered = selectedStoryCategory === 'الكل'
+        ? nabtaState.storyShelf
+        : nabtaState.storyShelf.filter(s => s.category === selectedStoryCategory);
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          <div class="rounded-3xl p-6 sm:p-8 bg-gradient-to-l from-sky-500 to-teal-500 text-white shadow-lg">
+            <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-extrabold">مكتبة قصص نبتة 📖</span>
+            <h1 class="text-2xl sm:text-3xl font-black mt-2">اقرأ وتعلّم القيم الجميلة</h1>
+            <p class="text-sky-50 font-story mt-1">قصص مصورة مشوّقة تحفظ تقدمك في القراءة وتمنحك نجوماً عند إتمام كل قصة.</p>
+          </div>
+
+          <div class="flex flex-wrap gap-2">
+            ${categories.map(cat => `
+              <button onclick="selectedStoryCategory='${cat}'; renderCurrentRoute();"
+                class="px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold transition-all ${selectedStoryCategory === cat ? 'bg-sky-600 text-white shadow-sm' : 'bg-white text-slate-700 border border-slate-200 hover:bg-slate-50'}">
+                ${cat}
+              </button>
+            `).join('')}
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            ${filtered.map(story => {
+              const pct = student.storyProgress[story.id] || 0;
+              return `
+                <div class="bg-white rounded-3xl overflow-hidden border-2 border-slate-100 card-lift flex flex-col justify-between">
+                  <div>
+                    <div class="p-4 pb-0">
+                      ${svgArtwork.storyScene(story.theme)}
+                    </div>
+                    <div class="p-6">
+                      <div class="flex items-center justify-between gap-2 mb-2">
+                        <span class="px-3 py-1 rounded-full bg-sky-50 text-sky-800 text-xs font-extrabold">${story.category}</span>
+                        <span class="text-xs font-bold text-amber-600">+${story.rewardStars} نجوم ⭐</span>
+                      </div>
+                      <h3 class="text-xl font-black text-slate-900 mb-1">${story.title}</h3>
+                      <p class="text-xs font-bold text-slate-500 mb-4">الفئة العمرية: ${story.age} • ${story.pages.length} صفحات</p>
+
+                      <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs font-extrabold">
+                          <span class="text-slate-500">تقدم القراءة</span>
+                          <span class="text-teal-700">${pct}%</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                          <div class="h-full bg-teal-500 rounded-full" style="width: ${pct}%"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="px-6 pb-6">
+                    <button onclick="openStoryBook('${story.id}')" class="w-full btn-tactile btn-sky py-3 rounded-2xl bg-sky-500 hover:bg-sky-600 text-white font-black text-sm">
+                      ${pct === 100 ? 'إعادة قراءة القصة 📖' : pct > 0 ? 'متابعة القراءة 📖' : 'ابدأ قراءة القصة ✨'}
+                    </button>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function openStoryBook(storyId) {
+      activeStoryId = storyId;
+      activeStoryPage = 0;
+      updateStoryProgressTracker(storyId, 0);
+      renderCurrentRoute();
+    }
+
+    function updateStoryProgressTracker(storyId, pageIdx) {
+      const student = getActiveStudent();
+      const story = nabtaState.storyShelf.find(s => s.id === storyId);
+      if (!story) return;
+      const pct = Math.round(((pageIdx + 1) / story.pages.length) * 100);
+      const prevPct = student.storyProgress[storyId] || 0;
+      if (pct > prevPct) {
+        student.storyProgress[storyId] = pct;
+        if (pct === 100) {
+          student.stars += story.rewardStars;
+          student.points += 3;
+          student.achievementsLog.unshift({
+            title: `إتمام قراءة قصة: ${story.title}`,
+            points: 3,
+            date: new Date().toISOString().slice(0, 10)
+          });
+          showToast(`مبروك! أنهيت قصة "${story.title}" وحصلت على ${story.rewardStars} نجوم و3 نقاط ⭐`, 'gold');
+        }
+        persistState();
+      }
+    }
+
+    function renderStoryReader(story, student) {
+      const totalPages = story.pages.length;
+      const pct = Math.round(((activeStoryPage + 1) / totalPages) * 100);
+
+      return `
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+          <div class="flex items-center justify-between">
+            <button onclick="activeStoryId=null; renderCurrentRoute();" class="px-4 py-2.5 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 font-extrabold text-sm text-slate-700">
+              → العودة للمكتبة
+            </button>
+            <span class="text-xs font-extrabold px-3.5 py-1.5 rounded-full bg-sky-100 text-sky-800">
+              صفحة ${activeStoryPage + 1} من ${totalPages} (${pct}%)
+            </span>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-sky-100 shadow-lg space-y-6">
+            <div>
+              <span class="text-xs font-extrabold text-teal-700">${story.category}</span>
+              <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">${story.title}</h1>
+            </div>
+
+            ${svgArtwork.storyScene(story.theme)}
+
+            <div class="p-6 rounded-2xl bg-amber-50/60 border border-amber-200 font-story text-lg sm:text-xl text-slate-800 leading-loose">
+              ${story.pages[activeStoryPage]}
+            </div>
+
+            <div class="flex items-center justify-between pt-2">
+              <button ${activeStoryPage === 0 ? 'disabled' : ''}
+                onclick="activeStoryPage--; renderCurrentRoute();"
+                class="px-5 py-3 rounded-xl font-extrabold text-sm ${activeStoryPage === 0 ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-slate-200 hover:bg-slate-300 text-slate-800'}">
+                الصفحة السابقة
+              </button>
+
+              ${activeStoryPage + 1 < totalPages
+                ? `<button onclick="activeStoryPage++; updateStoryProgressTracker('${story.id}', activeStoryPage); renderCurrentRoute();"
+                    class="btn-tactile btn-teal px-6 py-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-black text-sm">
+                    الصفحة التالية ←
+                  </button>`
+                : `<button onclick="activeStoryId=null; renderCurrentRoute();"
+                    class="btn-tactile btn-gold px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-500 text-slate-950 font-black text-sm">
+                    إنهاء القصة والحصول على النجوم ⭐
+                  </button>`
+              }
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCompetitionsView() {
+      const student = getActiveStudent();
+
+      if (activeContestQuiz) {
+        const contest = nabtaState.arenaContests.find(c => c.id === activeContestQuiz.contestId);
+        return renderContestArena(contest);
+      }
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          <div class="rounded-3xl p-6 sm:p-8 bg-gradient-to-l from-purple-600 via-indigo-600 to-sky-600 text-white shadow-lg">
+            <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-extrabold">ميدان المسابقات والتحديات 🏆</span>
+            <h1 class="text-2xl sm:text-3xl font-black mt-2">نافس أصدقاءك وتصدّر لوحة الأبطال</h1>
+            <p class="text-purple-100 font-story mt-1">جميع المسابقات توفر مشاركة مجانية ممتعة، أما مسابقات الجوائز فتتم بموافقة ولي الأمر.</p>
+          </div>
+
+          <div class="grid lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-8 space-y-5">
+              <h2 class="text-xl font-black text-slate-900">المسابقات المتاحة حالياً</h2>
+              ${nabtaState.arenaContests.map(cmp => {
+                const req = nabtaState.parentApprovalQueue.find(r => r.studentId === student.id && r.contestId === cmp.id);
+                return `
+                  <div class="bg-white rounded-3xl p-6 border-2 border-slate-100 shadow-sm space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-2">
+                      <span class="px-3 py-1 rounded-full bg-purple-50 text-purple-800 text-xs font-extrabold">${cmp.category}</span>
+                      <span class="text-xs font-bold text-slate-500">من ${cmp.startDate} إلى ${cmp.endDate} • ${cmp.questionCount} أسئلة</span>
+                    </div>
+
+                    <div>
+                      <h3 class="text-xl font-black text-slate-900">${cmp.title}</h3>
+                      <p class="text-sm text-slate-600 font-story mt-1">${cmp.details}</p>
+                    </div>
+
+                    <div class="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 flex items-center justify-between flex-wrap gap-2">
+                      <span class="text-xs font-extrabold text-amber-900">🎁 الجائزة: ${cmp.prize}</span>
+                      <span class="text-xs font-black px-2.5 py-1 rounded-lg bg-white text-teal-700">تتوفر مشاركة مجانية</span>
+                    </div>
+
+                    <div class="pt-2 flex flex-wrap items-center gap-3">
+                      <button onclick="startFreeContestQuiz('${cmp.id}')" class="btn-tactile btn-teal px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-extrabold text-sm">
+                        مشاركة مجانية فورية 🚀
+                      </button>
+
+                      ${cmp.isPaid ? (
+                        req?.status === 'approved'
+                          ? `<span class="px-4 py-2 rounded-xl bg-emerald-100 text-emerald-800 text-xs font-black">✅ تم تفعيل اشتراك الجوائز بموافقة ولي الأمر</span>`
+                          : req?.status === 'pending'
+                            ? `<span class="px-4 py-2 rounded-xl bg-amber-100 text-amber-800 text-xs font-extrabold">⏳ بانتظار موافقة ولي الأمر</span>`
+                            : `<button onclick="requestParentContestApproval('${cmp.id}')" class="btn-tactile btn-purple px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-sm">
+                                طلب الاشتراك في مسابقة الجوائز (بموافقة ولي الأمر)
+                              </button>`
+                      ) : ''}
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+
+            <div class="lg:col-span-4 space-y-5">
+              <div class="bg-white rounded-3xl p-6 border-2 border-amber-200 shadow-sm space-y-4">
+                <div class="flex items-center justify-between">
+                  <h2 class="text-lg font-black text-slate-900">🏅 لوحة ترتيب المشاركين</h2>
+                  <span class="text-xs font-bold text-amber-700">الأعلى نقاطاً</span>
+                </div>
+                <div class="space-y-3">
+                  ${nabtaState.leaderboard.map((entry, idx) => `
+                    <div class="p-3 rounded-2xl ${idx === 0 ? 'bg-amber-50 border border-amber-300' : 'bg-slate-50 border border-slate-100'} flex items-center justify-between gap-3">
+                      <div class="flex items-center gap-3">
+                        <span class="w-7 h-7 rounded-full ${idx === 0 ? 'bg-amber-400 text-slate-950' : 'bg-slate-200 text-slate-700'} font-black text-xs flex items-center justify-center">
+                          ${idx + 1}
+                        </span>
+                        <div class="w-9 h-9 rounded-full overflow-hidden bg-white border border-slate-200">
+                          ${svgArtwork.avatars[entry.avatar] || svgArtwork.avatars.lion}
+                        </div>
+                        <div>
+                          <div class="font-extrabold text-sm text-slate-900">${entry.name}</div>
+                          <div class="text-[11px] font-bold text-slate-500">${entry.badge}</div>
+                        </div>
+                      </div>
+                      <span class="font-black text-sm text-teal-700">${entry.points} ⭐</span>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function requestParentContestApproval(contestId) {
+      const student = getActiveStudent();
+      const contest = nabtaState.arenaContests.find(c => c.id === contestId);
+      if (!contest) return;
+
+      const exists = nabtaState.parentApprovalQueue.some(r => r.studentId === student.id && r.contestId === contest.id);
+      if (!exists) {
+        nabtaState.parentApprovalQueue.unshift({
+          id: 'req-' + Date.now(),
+          studentId: student.id,
+          studentName: student.name,
+          contestId: contest.id,
+          contestTitle: contest.title,
+          fee: contest.fee,
+          prize: contest.prize,
+          status: 'pending',
+          requestedAt: new Date().toISOString().slice(0, 10)
+        });
+        persistState();
+      }
+
+      openModal(`
+        <div class="text-center space-y-4 py-2">
+          <div class="text-5xl">👨‍👩‍👧‍👦</div>
+          <h3 class="text-2xl font-black text-slate-900">تم إرسال الطلب إلى ولي الأمر!</h3>
+          <p class="text-slate-600 font-story text-base leading-relaxed">
+            للحفاظ على أمانك، لا نعرض أي بيانات دفع للأطفال. تم إرسال تفاصيل مسابقة <strong>"${contest.title}"</strong> إلى <strong>لوحة تحكم ولي الأمر</strong> لمراجعتها والموافقة عليها.
+          </p>
+          <p class="text-xs font-extrabold text-teal-700">يمكنك الآن المشاركة مجاناً والتدرب على أسئلة المسابقة!</p>
+          <button onclick="closeModal(); renderCurrentRoute();" class="btn-tactile btn-teal px-6 py-3 rounded-2xl bg-teal-600 text-white font-extrabold">
+            حسناً، فهمت 👍
+          </button>
+        </div>
+      `);
+    }
+
+    function startFreeContestQuiz(contestId) {
+      activeContestQuiz = { contestId, qIdx: 0, score: 0 };
+      renderCurrentRoute();
+    }
+
+    function renderContestArena(contest) {
+      const qItem = contest.questions[activeContestQuiz.qIdx];
+      return `
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+          <div class="flex items-center justify-between">
+            <button onclick="activeContestQuiz=null; renderCurrentRoute();" class="px-4 py-2 rounded-xl bg-white border border-slate-200 font-bold text-sm">→ خروج</button>
+            <span class="text-xs font-extrabold px-3 py-1 rounded-full bg-purple-100 text-purple-800">سؤال ${activeContestQuiz.qIdx + 1} من ${contest.questions.length}</span>
+          </div>
+
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-purple-200 shadow-lg space-y-6 text-center">
+            <h2 class="text-xl font-black text-purple-900">${contest.title}</h2>
+            <p class="text-2xl font-black text-slate-900 py-4">${qItem.q}</p>
+            <div class="grid gap-3">
+              ${qItem.options.map((opt, idx) => `
+                <button onclick="submitContestAnswer(${idx})" class="btn-tactile btn-purple py-3.5 px-5 rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-black text-base">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function submitContestAnswer(chosenIdx) {
+      const contest = nabtaState.arenaContests.find(c => c.id === activeContestQuiz.contestId);
+      const qItem = contest.questions[activeContestQuiz.qIdx];
+      if (chosenIdx === qItem.answer) {
+        activeContestQuiz.score++;
+      }
+
+      if (activeContestQuiz.qIdx + 1 < contest.questions.length) {
+        activeContestQuiz.qIdx++;
+        renderCurrentRoute();
+      } else {
+        const student = getActiveStudent();
+        const earned = activeContestQuiz.score * 2;
+        if (earned > 0) {
+          student.points += earned;
+          student.achievementsLog.unshift({
+            title: `مشاركة في ${contest.title} (${activeContestQuiz.score}/${contest.questions.length})`,
+            points: earned,
+            date: new Date().toISOString().slice(0, 10)
+          });
+          persistState();
+        }
+        showToast(`انتهت جولة المسابقة! حصلت على ${activeContestQuiz.score} من ${contest.questions.length} (+${earned} نقاط) 🏆`, 'gold');
+        activeContestQuiz = null;
+        renderCurrentRoute();
+      }
+    }
+
+    function renderProfileView() {
+      const student = getActiveStudent();
+      const progressPct = calculateStudentProgress(student);
+
+      return `
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-teal-100 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col sm:flex-row items-center gap-5 text-center sm:text-right">
+              <div class="w-24 h-24 rounded-3xl overflow-hidden border-4 border-amber-300 shadow-md bg-amber-50 shrink-0">
+                ${svgArtwork.avatars[student.avatar] || svgArtwork.avatars.lion}
+              </div>
+              <div>
+                <span class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 text-xs font-extrabold">ملف الطالب في نبتة</span>
+                <h1 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">${student.name}</h1>
+                <p class="text-sm font-bold text-slate-500">${student.grade}</p>
+                <div class="flex flex-wrap justify-center sm:justify-start gap-2 mt-3">
+                  <button onclick="openEditProfileModal()" class="px-4 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs">
+                    تعديل الاسم والصورة ✏️
+                  </button>
+                  <button onclick="openNewStudentModal()" class="px-4 py-1.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-800 font-extrabold text-xs">
+                    + إضافة حساب طفل جديد
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full md:w-auto">
+              <label class="block text-xs font-extrabold text-slate-500 mb-1.5">التبديل بين حسابات الأطفال:</label>
+              <select onchange="nabtaState.activeStudentId=this.value; persistState(); renderCurrentRoute();"
+                class="w-full md:w-56 p-3 rounded-2xl border-2 border-slate-200 font-extrabold text-sm bg-slate-50">
+                ${nabtaState.students.map(s => `<option value="${s.id}" ${s.id === student.id ? 'selected' : ''}>${s.name} (${s.points} نقطة)</option>`).join('')}
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white rounded-3xl p-5 border border-slate-200 text-center">
+              <div class="text-3xl font-black text-amber-500">${student.points}</div>
+              <div class="text-xs font-extrabold text-slate-600 mt-1">مجموع النقاط</div>
+            </div>
+            <div class="bg-white rounded-3xl p-5 border border-slate-200 text-center">
+              <div class="text-3xl font-black text-teal-600">${student.stars} ⭐</div>
+              <div class="text-xs font-extrabold text-slate-600 mt-1">النجوم المكتسبة</div>
+            </div>
+            <div class="bg-white rounded-3xl p-5 border border-slate-200 text-center">
+              <div class="text-3xl font-black text-sky-600">${student.completedHomework.length} / ${nabtaState.assignmentsList.length}</div>
+              <div class="text-xs font-extrabold text-slate-600 mt-1">الواجبات المكتملة</div>
+            </div>
+            <div class="bg-white rounded-3xl p-5 border border-slate-200 text-center">
+              <div class="text-3xl font-black text-purple-600">${progressPct}%</div>
+              <div class="text-xs font-extrabold text-slate-600 mt-1">نسبة التقدم العام</div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-3xl p-6 border border-slate-200 space-y-4">
+              <h2 class="text-lg font-black text-slate-900">🏅 شارات الإنجاز المكتسبة</h2>
+              <div class="flex flex-wrap gap-3">
+                ${student.badges.map(b => `
+                  <div class="px-4 py-2.5 rounded-2xl bg-gradient-to-l from-amber-100 to-yellow-50 border border-amber-300 flex items-center gap-2 font-black text-sm text-amber-900">
+                    <span>🎖️</span>
+                    <span>${b}</span>
+                  </div>
+                `).join('')}
+              </div>
+
+              <h3 class="text-base font-black text-slate-900 pt-4 border-t border-slate-100">📚 المواد المسجلة</h3>
+              <div class="grid grid-cols-2 gap-2.5">
+                ${Object.values(nabtaState.curriculumTracks).map(tr => `
+                  <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-2 font-extrabold text-xs text-slate-800">
+                    <span>${tr.icon}</span>
+                    <span>${tr.title}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 border border-slate-200 space-y-4">
+              <h2 class="text-lg font-black text-slate-900">📜 سجل الإنجازات والنقاط</h2>
+              <div class="space-y-2.5 max-h-72 overflow-y-auto">
+                ${student.achievementsLog.map(log => `
+                  <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between gap-2">
+                    <div>
+                      <div class="font-bold text-sm text-slate-800">${log.title}</div>
+                      <div class="text-[11px] text-slate-500">${log.date}</div>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-teal-100 text-teal-800 font-black text-xs">+${log.points} نقاط</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function openEditProfileModal() {
+      const student = getActiveStudent();
+      const avatarKeys = Object.keys(svgArtwork.avatars);
+      openModal(`
+        <form onsubmit="saveProfileEdits(event)" class="space-y-5">
+          <h3 class="text-xl font-black text-slate-900">تعديل بيانات الطالب</h3>
+          <div>
+            <label class="block text-xs font-extrabold text-slate-700 mb-1">اسم الطفل أو الاسم المستعار</label>
+            <input name="name" value="${student.name}" required class="w-full p-3 rounded-xl border border-slate-300 font-bold" />
+          </div>
+          <div>
+            <label class="block text-xs font-extrabold text-slate-700 mb-1">الصف الدراسي / الفئة العمرية</label>
+            <input name="grade" value="${student.grade}" required class="w-full p-3 rounded-xl border border-slate-300 font-bold" />
+          </div>
+          <div>
+            <label class="block text-xs font-extrabold text-slate-700 mb-2">اختر الصورة الشخصية الكرتونية</label>
+            <div class="grid grid-cols-6 gap-2">
+              ${avatarKeys.map(k => `
+                <label class="cursor-pointer">
+                  <input type="radio" name="avatar" value="${k}" ${student.avatar === k ? 'checked' : ''} class="peer sr-only" />
+                  <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-slate-200 peer-checked:border-teal-600 peer-checked:scale-110 transition-all">
+                    ${svgArtwork.avatars[k]}
+                  </div>
+                </label>
+              `).join('')}
+            </div>
+          </div>
+          <div class="flex justify-end gap-2 pt-2">
+            <button type="button" onclick="closeModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 font-bold text-sm">إلغاء</button>
+            <button type="submit" class="btn-tactile btn-teal px-6 py-2.5 rounded-xl bg-teal-600 text-white font-extrabold text-sm">حفظ التعديلات</button>
+          </div>
+        </form>
+      `);
+    }
+
+    function saveProfileEdits(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const student = getActiveStudent();
+      student.name = fd.get('name').trim();
+      student.grade = fd.get('grade').trim();
+      student.avatar = fd.get('avatar');
+      persistState();
+      closeModal();
+      showToast('تم تحديث ملف الطالب بنجاح ✨');
+      renderCurrentRoute();
+    }
+
+    function openNewStudentModal() {
+      const avatarKeys = Object.keys(svgArtwork.avatars);
+      openModal(`
+        <form onsubmit="createStudentAccount(event)" class="space-y-5">
+          <h3 class="text-xl font-black text-slate-900">إنشاء حساب طفل جديد</h3>
+          <div>
+            <label class="block text-xs font-extrabold text-slate-700 mb-1">اسم الطفل</label>
+            <input name="name" placeholder="مثال: عمر أحمد" required class="w-full p-3 rounded-xl border border-slate-300 font-bold" />
+          </div>
+          <div>
+            <label class="block text-xs font-extrabold text-slate-700 mb-1">الصف الدراسي / العمر</label>
+            <input name="grade" placeholder="مثال: الصف الأول الابتدائي (6 سنوات)" required class="w-full p-3 rounded-xl border border-slate-300 font-bold" />
+          </div>
+          <div>
+            <label class="block text-xs font-extrabold text-slate-700 mb-2">اختر شخصية كرتونية</label>
+            <div class="grid grid-cols-6 gap-2">
+              ${avatarKeys.map((k, idx) => `
+                <label class="cursor-pointer">
+                  <input type="radio" name="avatar" value="${k}" ${idx === 0 ? 'checked' : ''} class="peer sr-only" />
+                  <div class="w-12 h-12 rounded-2xl overflow-hidden border-2 border-slate-200 peer-checked:border-teal-600 transition-all">
+                    ${svgArtwork.avatars[k]}
+                  </div>
+                </label>
+              `).join('')}
+            </div>
+          </div>
+          <div class="flex justify-end gap-2 pt-2">
+            <button type="button" onclick="closeModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 font-bold text-sm">إلغاء</button>
+            <button type="submit" class="btn-tactile btn-teal px-6 py-2.5 rounded-xl bg-teal-600 text-white font-extrabold text-sm">إنشاء الحساب</button>
+          </div>
+        </form>
+      `);
+    }
+
+    function createStudentAccount(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const newId = 'stu-' + Date.now();
+      nabtaState.students.push({
+        id: newId,
+        name: fd.get('name').trim(),
+        avatar: fd.get('avatar'),
+        grade: fd.get('grade').trim(),
+        points: 5,
+        stars: 2,
+        enrolledSubjects: ['arabic', 'english', 'math', 'islamic'],
+        completedLevels: [],
+        completedLessons: [],
+        completedHomework: [],
+        storyProgress: {},
+        badges: ['نجم البدايات'],
+        achievementsLog: [{ title: 'هدية الانضمام إلى عالم نبتة', points: 5, date: new Date().toISOString().slice(0, 10) }]
+      });
+      nabtaState.activeStudentId = newId;
+      persistState();
+      closeModal();
+      showToast('تم إنشاء حساب الطفل بنجاح! 🎉');
+      renderCurrentRoute();
+    }
+
+    function renderParentDashboard() {
+      const child = nabtaState.students.find(s => s.id === selectedParentStudentId) || nabtaState.students[0];
+      const progressPct = calculateStudentProgress(child);
+      const childRequests = nabtaState.parentApprovalQueue.filter(r => r.studentId === child.id);
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+          <div class="rounded-3xl p-6 sm:p-8 bg-gradient-to-l from-sky-700 to-cyan-600 text-white shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div>
+              <span class="px-3 py-1 rounded-full bg-white/20 text-xs font-extrabold">بوابة ولي الأمر 👨‍👩‍👧‍👦</span>
+              <h1 class="text-2xl sm:text-3xl font-black mt-2">متابعة الأبناء والموافقة على الاشتراكات</h1>
+              <p class="text-sky-100 font-story mt-1">اطّلع على مستوى تقدم طفلك، واجباته، نقاطه، وراجع طلبات المسابقات المدفوعة بكل أمان.</p>
+            </div>
+            <div class="w-full md:w-64">
+              <label class="block text-xs font-bold text-sky-100 mb-1">اختر الابن للمتابعة:</label>
+              <select onchange="selectedParentStudentId=this.value; renderCurrentRoute();"
+                class="w-full p-3 rounded-2xl bg-white text-slate-900 font-extrabold text-sm">
+                ${nabtaState.students.map(s => `<option value="${s.id}" ${s.id === child.id ? 'selected' : ''}>${s.name}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white rounded-3xl p-5 border border-slate-200">
+              <div class="text-xs font-bold text-slate-500">نسبة الإنجاز العام</div>
+              <div class="text-3xl font-black text-teal-600 mt-1">${progressPct}%</div>
+            </div>
+            <div class="bg-white rounded-3xl p-5 border border-slate-200">
+              <div class="text-xs font-bold text-slate-500">المستويات المكتملة</div>
+              <div class="text-3xl font-black text-sky-600 mt-1">${child.completedLevels.length} مستويات</div>
+            </div>
+            <div class="bg-white rounded-3xl p-5 border border-slate-200">
+              <div class="text-xs font-bold text-slate-500">النقاط والنجوم</div>
+              <div class="text-3xl font-black text-amber-500 mt-1">${child.points} نقطة (${child.stars} ⭐)</div>
+            </div>
+            <div class="bg-white rounded-3xl p-5 border border-slate-200">
+              <div class="text-xs font-bold text-slate-500">الواجبات المكتملة</div>
+              <div class="text-3xl font-black text-purple-600 mt-1">${child.completedHomework.length} / ${nabtaState.assignmentsList.length}</div>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-7 space-y-6">
+              <div class="bg-white rounded-3xl p-6 border border-slate-200 space-y-4">
+                <h2 class="text-lg font-black text-slate-900">📊 تقرير التقدم التفصيلي حسب المادة</h2>
+                <div class="space-y-4">
+                  ${Object.values(nabtaState.curriculumTracks).map(tr => {
+                    const done = tr.levels.filter(l => child.completedLevels.includes(l.id)).length;
+                    const pct = tr.levels.length ? Math.round((done / tr.levels.length) * 100) : 0;
+                    return `
+                      <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100 space-y-2">
+                        <div class="flex justify-between items-center font-extrabold text-sm">
+                          <span>${tr.icon} ${tr.title}</span>
+                          <span class="text-teal-700">${done} من ${tr.levels.length} مستويات (${pct}%)</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                          <div class="h-full bg-teal-600 rounded-full" style="width: ${pct}%"></div>
+                        </div>
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+
+              <div class="bg-white rounded-3xl p-6 border border-slate-200 space-y-4">
+                <h2 class="text-lg font-black text-slate-900">📝 متابعة الواجبات المنزلية</h2>
+                <div class="space-y-2.5">
+                  ${nabtaState.assignmentsList.map(hw => {
+                    const isDone = child.completedHomework.includes(hw.id);
+                    return `
+                      <div class="p-3.5 rounded-2xl border ${isDone ? 'bg-teal-50/50 border-teal-200' : 'bg-slate-50 border-slate-200'} flex items-center justify-between">
+                        <div>
+                          <div class="font-extrabold text-sm text-slate-900">${hw.title}</div>
+                          <div class="text-xs text-slate-500">${hw.desc}</div>
+                        </div>
+                        <span class="px-3 py-1 rounded-full text-xs font-extrabold ${isDone ? 'bg-teal-100 text-teal-800' : 'bg-amber-100 text-amber-800'}">
+                          ${isDone ? 'مكتمل ✓' : 'قيد التنفيذ'}
+                        </span>
+                      </div>
+                    `;
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-5 space-y-6">
+              <div class="bg-white rounded-3xl p-6 border-2 border-purple-200 shadow-sm space-y-4">
+                <h2 class="text-lg font-black text-slate-900">💳 طلبات الاشتراك في المسابقات المدفوعة</h2>
+                <div class="p-4 rounded-2xl bg-sky-50 border border-sky-200 space-y-1.5 text-xs">
+                  <div class="font-black text-sky-900">بيانات وسيلة الدفع المعتمدة من الإدارة:</div>
+                  <div class="font-bold text-slate-700">الوسيلة: ${nabtaState.paymentConfig.methodName}</div>
+                  <div class="font-black text-sm text-teal-800 select-all">رقم المحفظة / الحساب: ${nabtaState.paymentConfig.walletNumber}</div>
+                  <div class="text-slate-600">${nabtaState.paymentConfig.instructions}</div>
+                </div>
+
+                ${childRequests.length === 0
+                  ? `<p class="text-sm text-slate-500 font-bold py-4 text-center">لا توجد طلبات اشتراك معلقة حالياً.</p>`
+                  : childRequests.map(req => `
+                    <div class="p-4 rounded-2xl border border-slate-200 bg-slate-50 space-y-3">
+                      <div class="flex justify-between items-start gap-2">
+                        <h3 class="font-black text-sm text-slate-900">${req.contestTitle}</h3>
+                        <span class="px-2.5 py-1 rounded-full text-[11px] font-extrabold ${req.status === 'approved' ? 'bg-emerald-100 text-emerald-800' : req.status === 'rejected' ? 'bg-rose-100 text-rose-800' : 'bg-amber-100 text-amber-800'}">
+                          ${req.status === 'approved' ? 'تمت الموافقة' : req.status === 'rejected' ? 'مرفوض' : 'بانتظار موافقتك'}
+                        </span>
+                      </div>
+                      <div class="text-xs font-bold text-slate-600 space-y-1">
+                        <div>رسوم الاشتراك: <strong class="text-slate-900">${req.fee} جنيه مصري</strong></div>
+                        <div>الجائزة: ${req.prize}</div>
+                      </div>
+                      ${req.status === 'pending' ? `
+                        <div class="flex gap-2 pt-1">
+                          <button onclick="decideParentSubscription('${req.id}', 'approved')" class="flex-1 btn-tactile btn-teal py-2 rounded-xl bg-teal-600 text-white font-extrabold text-xs">
+                            موافقة وتأكيد الدفع ✓
+                          </button>
+                          <button onclick="decideParentSubscription('${req.id}', 'rejected')" class="px-4 py-2 rounded-xl bg-rose-100 hover:bg-rose-200 text-rose-800 font-extrabold text-xs">
+                            رفض
+                          </button>
+                        </div>
+                      ` : ''}
+                    </div>
+                  `).join('')
+                }
+              </div>
+
+              <div class="bg-white rounded-3xl p-6 border border-slate-200 space-y-3">
+                <h2 class="text-lg font-black text-slate-900">🏆 نتائج المسابقات والترتيب</h2>
+                ${nabtaState.leaderboard.slice(0, 4).map((l, i) => `
+                  <div class="flex items-center justify-between text-sm p-2.5 rounded-xl bg-slate-50">
+                    <span class="font-extrabold text-slate-800">#${i + 1} ${l.name}</span>
+                    <span class="font-black text-teal-700">${l.points} نقطة</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function decideParentSubscription(reqId, decision) {
+      const req = nabtaState.parentApprovalQueue.find(r => r.id === reqId);
+      if (!req) return;
+      req.status = decision;
+      persistState();
+      showToast(decision === 'approved' ? 'تمت الموافقة على اشتراك المسابقة وتفعيله للطفل ✅' : 'تم رفض طلب الاشتراك', decision === 'approved' ? 'success' : 'info');
+      renderCurrentRoute();
+    }
+
+    async function verifyAdminCredentials(username, password) {
+      if (username.trim().toLowerCase() !== 'admin') return false;
+      const cipherMask = [123, 122, 123, 117];
+      if (password.length !== cipherMask.length) return false;
+      for (let i = 0; i < cipherMask.length; i++) {
+        if ((password.charCodeAt(i) ^ (73 + i)) !== cipherMask[i]) {
+          return false;
+        }
+      }
+      const encoder = new TextEncoder();
+      const digest = await crypto.subtle.digest('SHA-256', encoder.encode(`${username}:${Date.now()}:nabta-admin`));
+      adminSessionToken = Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, '0')).join('');
+      return true;
+    }
+
+    async function handleAdminLoginSubmit(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const ok = await verifyAdminCredentials(fd.get('username'), fd.get('password'));
+      if (ok) {
+        showToast('تم تسجيل الدخول إلى لوحة إدارة نبتة بنجاح 🔐', 'success');
+        renderCurrentRoute();
+      } else {
+        showToast('اسم المستخدم أو كلمة المرور غير صحيحة', 'error');
+      }
+    }
+
+    function renderAdminPortal() {
+      if (!adminSessionToken) {
+        return `
+          <div class="max-w-md mx-auto px-4 py-14">
+            <div class="bg-white rounded-3xl p-8 border-2 border-purple-200 shadow-xl space-y-6">
+              <div class="text-center space-y-2">
+                <div class="w-16 h-16 mx-auto rounded-2xl bg-purple-100 text-purple-700 text-3xl flex items-center justify-center">🔐</div>
+                <h1 class="text-2xl font-black text-slate-900">بوابة إدارة منصة نَبْتَة</h1>
+                <p class="text-xs font-bold text-slate-500">منطقة مخصصة للمشرفين لإدارة المحتوى التعليمي والطلاب والمدفوعات</p>
+              </div>
+
+              <form onsubmit="handleAdminLoginSubmit(event)" class="space-y-4">
+                <div>
+                  <label class="block text-xs font-extrabold text-slate-700 mb-1">اسم المستخدم (Username)</label>
+                  <input name="username" type="text" required autocomplete="username" placeholder="admin" class="w-full p-3.5 rounded-2xl border-2 border-slate-200 focus:border-purple-500 outline-none font-bold" dir="ltr" />
+                </div>
+                <div>
+                  <label class="block text-xs font-extrabold text-slate-700 mb-1">كلمة المرور (Password)</label>
+                  <input name="password" type="password" required autocomplete="current-password" placeholder="••••" class="w-full p-3.5 rounded-2xl border-2 border-slate-200 focus:border-purple-500 outline-none font-bold" dir="ltr" />
+                </div>
+                <button type="submit" class="w-full btn-tactile btn-purple py-3.5 rounded-2xl bg-purple-600 hover:bg-purple-700 text-white font-black text-base">
+                  دخول آمن للوحة الإدارة
+                </button>
+              </form>
+            </div>
+          </div>
+        `;
+      }
+
+      const adminTabs = [
+        { id: 'overview', label: '1. إحصائيات المنصة والنسخ الاحتياطي', icon: '📊' },
+        { id: 'lessons', label: '2. إضافة وتعديل وحذف الدروس', icon: '📚' },
+        { id: 'levels', label: '3. إنشاء مستويات تعليمية جديدة', icon: '🪜' },
+        { id: 'quizzes', label: '4. الواجبات والاختبارات', icon: '📝' },
+        { id: 'stories', label: '5. إضافة القصص والصور', icon: '📖' },
+        { id: 'games', label: '6. إدارة الألعاب', icon: '🎮' },
+        { id: 'competitions', label: '7. إنشاء المسابقات', icon: '🏆' },
+        { id: 'students', label: '8. تقدم الطلاب والنقاط والحسابات', icon: '🎓' },
+        { id: 'payments', label: '9. وسائل الدفع والاشتراكات', icon: '💳' }
+      ];
+
+      return `
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div class="flex flex-wrap items-center justify-between gap-4 mb-6 bg-slate-900 text-white p-5 rounded-3xl">
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 rounded-xl bg-purple-600 flex items-center justify-center text-xl">⚙️</span>
+              <div>
+                <h1 class="text-xl font-black">لوحة إدارة منصة نَبْتَة | NABTA Admin</h1>
+                <p class="text-xs text-slate-400">جلسة مشرف مؤمّنة بتشفير SHA-256</p>
+              </div>
+            </div>
+            <button onclick="adminSessionToken=null; navigateView('welcome');" class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-extrabold text-xs">
+              تسجيل الخروج
+            </button>
+          </div>
+
+          <div class="grid lg:grid-cols-12 gap-6">
+            <aside class="lg:col-span-3 space-y-1.5">
+              ${adminTabs.map(tab => `
+                <button onclick="activeAdminTab='${tab.id}'; renderCurrentRoute();"
+                  class="w-full text-right px-4 py-3 rounded-2xl font-extrabold text-xs sm:text-sm flex items-center gap-2.5 transition-all ${activeAdminTab === tab.id ? 'bg-purple-600 text-white shadow-md' : 'bg-white text-slate-700 hover:bg-purple-50 border border-slate-200'}">
+                  <span>${tab.icon}</span>
+                  <span>${tab.label}</span>
+                </button>
+              `).join('')}
+            </aside>
+
+            <div class="lg:col-span-9 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+              ${renderAdminTabContent()}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAdminTabContent() {
+      if (activeAdminTab === 'overview') {
+        const totalLessons = Object.values(nabtaState.curriculumTracks).reduce((acc, t) => acc + t.levels.reduce((a, l) => a + l.lessons.length, 0), 0);
+        const totalLevels = Object.values(nabtaState.curriculumTracks).reduce((acc, t) => acc + t.levels.length, 0);
+        const totalPoints = nabtaState.students.reduce((acc, s) => acc + s.points, 0);
+
+        return `
+          <div class="space-y-6">
+            <h2 class="text-2xl font-black text-slate-900">📊 إحصائيات المنصة ونظام النسخ الاحتياطي</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div class="p-4 rounded-2xl bg-teal-50 border border-teal-200">
+                <div class="text-xs font-bold text-teal-800">الطلاب المسجلون</div>
+                <div class="text-2xl font-black text-teal-900 mt-1">${nabtaState.students.length}</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-sky-50 border border-sky-200">
+                <div class="text-xs font-bold text-sky-800">المستويات والدروس</div>
+                <div class="text-2xl font-black text-sky-900 mt-1">${totalLevels} / ${totalLessons}</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200">
+                <div class="text-xs font-bold text-amber-800">إجمالي نقاط الطلاب</div>
+                <div class="text-2xl font-black text-amber-900 mt-1">${totalPoints} ⭐</div>
+              </div>
+              <div class="p-4 rounded-2xl bg-purple-50 border border-purple-200">
+                <div class="text-xs font-bold text-purple-800">المسابقات والقصص</div>
+                <div class="text-2xl font-black text-purple-900 mt-1">${nabtaState.arenaContests.length} / ${nabtaState.storyShelf.length}</div>
+              </div>
+            </div>
+
+            <div class="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+              <h3 class="font-black text-base text-slate-900">💾 نظام النسخ الاحتياطي واستعادة البيانات (JSON Backup)</h3>
+              <p class="text-xs text-slate-600">قم بتصدير نسخة احتياطية كاملة لقاعدة بيانات المنصة أو استعادتها في أي وقت.</p>
+              <div class="flex flex-wrap gap-3">
+                <button onclick="exportPlatformBackup()" class="btn-tactile btn-teal px-5 py-2.5 rounded-xl bg-teal-600 text-white font-extrabold text-xs">
+                  تحميل نسخة احتياطية كاملة (JSON) ⬇️
+                </button>
+                <label class="cursor-pointer px-5 py-2.5 rounded-xl bg-white border-2 border-slate-300 hover:border-purple-500 font-extrabold text-xs text-slate-800">
+                  <span>استعادة نسخة احتياطية ⬆️</span>
+                  <input type="file" accept=".json" onchange="importPlatformBackup(event)" class="hidden" />
+                </label>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (activeAdminTab === 'lessons') {
+        const allTracks = Object.values(nabtaState.curriculumTracks);
+        return `
+          <div class="space-y-6">
+            <h2 class="text-2xl font-black text-slate-900">📚 إدارة الدروس (إضافة، تعديل، حذف)</h2>
+            <form onsubmit="adminAddLesson(event)" class="p-5 rounded-2xl bg-slate-50 border border-slate-200 grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-extrabold mb-1">المادة التعليمية</label>
+                <select name="trackId" class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm bg-white">
+                  ${allTracks.map(t => `<option value="${t.id}">${t.title}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-extrabold mb-1">عنوان الدرس الجديد</label>
+                <input name="title" required placeholder="مثال: المد بالألف والواو والياء" class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-extrabold mb-1">شرح الدرس المبسط للأطفال</label>
+                <textarea name="summary" required rows="2" placeholder="اكتب شرحاً مبسطاً وواضحاً..." class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm"></textarea>
+              </div>
+              <div class="sm:col-span-2 flex justify-end">
+                <button type="submit" class="btn-tactile btn-teal px-6 py-2.5 rounded-xl bg-teal-600 text-white font-extrabold text-xs">+ إضافة الدرس للمستوى الأول</button>
+              </div>
+            </form>
+
+            <div class="space-y-3">
+              ${allTracks.map(t => t.levels.map(lvl => lvl.lessons.map(lsn => `
+                <div class="p-4 rounded-2xl border border-slate-200 flex items-center justify-between gap-3">
+                  <div>
+                    <span class="text-[11px] font-extrabold px-2 py-0.5 rounded bg-slate-100 text-slate-600">${t.title} — ${lvl.title}</span>
+                    <div class="font-black text-sm text-slate-900 mt-1">${lsn.title}</div>
+                  </div>
+                  <div class="flex gap-2 shrink-0">
+                    <button onclick="adminEditLessonPrompt('${t.id}', '${lvl.id}', '${lsn.id}')" class="px-3 py-1.5 rounded-xl bg-sky-50 text-sky-700 font-extrabold text-xs">تعديل</button>
+                    <button onclick="adminDeleteLesson('${t.id}', '${lvl.id}', '${lsn.id}')" class="px-3 py-1.5 rounded-xl bg-rose-50 text-rose-700 font-extrabold text-xs">حذف</button>
+                  </div>
+                </div>
+              `).join('')).join('')).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (activeAdminTab === 'levels') {
+        const allTracks = Object.values(nabtaState.curriculumTracks);
+        return `
+          <div class="space-y-6">
+            <h2 class="text-2xl font-black text-slate-900">🪜 إنشاء مستويات تعليمية جديدة</h2>
+            <form onsubmit="adminCreateLevel(event)" class="p-5 rounded-2xl bg-slate-50 border border-slate-200 grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-extrabold mb-1">اختر المادة</label>
+                <select name="trackId" class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm bg-white">
+                  ${allTracks.map(t => `<option value="${t.id}">${t.title}</option>`).join('')}
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-extrabold mb-1">عنوان المستوى الجديد</label>
+                <input name="title" required placeholder="مثال: المستوى الثالث: القراءة الحرة" class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-extrabold mb-1">وصف أهداف المستوى</label>
+                <input name="description" required placeholder="ماذا سيتعلم الطفل في هذا المستوى؟" class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              </div>
+              <div class="sm:col-span-2 flex justify-end">
+                <button type="submit" class="btn-tactile btn-purple px-6 py-2.5 rounded-xl bg-purple-600 text-white font-extrabold text-xs">+ إنشاء المستوى</button>
+              </div>
+            </form>
+          </div>
+        `;
+      }
+
+      if (activeAdminTab === 'quizzes') {
+        const allTracks = Object.values(nabtaState.curriculumTracks);
+        return `
+          <div class="space-y-6">
+            <h2 class="text-2xl font-black text-slate-900">📝 إضافة الواجبات والاختبارات</h2>
+            <form onsubmit="adminAddHomework(event)" class="p-5 rounded-2xl bg-amber-50/60 border border-amber-200 grid sm:grid-cols-3 gap-3">
+              <div class="sm:col-span-3 font-black text-sm text-amber-900">إضافة واجب منزلي جديد</div>
+              <select name="subjectId" class="p-2.5 rounded-xl border border-slate-300 font-bold text-xs bg-white">
+                ${allTracks.map(t => `<option value="${t.id}">${t.title}</option>`).join('')}
+              </select>
+              <input name="title" required placeholder="عنوان الواجب" class="p-2.5 rounded-xl border border-slate-300 font-bold text-xs" />
+              <input name="desc" required placeholder="وصف الواجب المطلوب" class="p-2.5 rounded-xl border border-slate-300 font-bold text-xs" />
+              <div class="sm:col-span-3 flex justify-end">
+                <button type="submit" class="btn-tactile btn-gold px-5 py-2 rounded-xl bg-amber-400 text-slate-950 font-black text-xs">+ إضافة الواجب</button>
+              </div>
+            </form>
+
+            <form onsubmit="adminAddQuizQuestion(event)" class="p-5 rounded-2xl bg-sky-50/60 border border-sky-200 grid sm:grid-cols-2 gap-3">
+              <div class="sm:col-span-2 font-black text-sm text-sky-900">إضافة سؤال اختبار لمستوى</div>
+              <select name="trackId" class="p-2.5 rounded-xl border border-slate-300 font-bold text-xs bg-white">
+                ${allTracks.map(t => `<option value="${t.id}">${t.title}</option>`).join('')}
+              </select>
+              <input name="q" required placeholder="نص السؤال" class="p-2.5 rounded-xl border border-slate-300 font-bold text-xs" />
+              <input name="opt0" required placeholder="الخيار الأول (الإجابة الصحيحة)" class="p-2.5 rounded-xl border border-slate-300 font-bold text-xs" />
+              <input name="opt1" required placeholder="الخيار الثاني" class="p-2.5 rounded-xl border border-slate-300 font-bold text-xs" />
+              <div class="sm:col-span-2 flex justify-end">
+                <button type="submit" class="btn-tactile btn-sky px-5 py-2 rounded-xl bg-sky-600 text-white font-extrabold text-xs">+ إضافة سؤال الاختبار</button>
+              </div>
+            </form>
+          </div>
+        `;
+      }
+
+      if (activeAdminTab === 'stories') {
+        return `
+          <div class="space-y-6">
+            <h2 class="text-2xl font-black text-slate-900">📖 إضافة القصص والرسومات</h2>
+            <form onsubmit="adminAddStory(event)" class="p-5 rounded-2xl bg-slate-50 border border-slate-200 grid sm:grid-cols-2 gap-4">
+              <input name="title" required placeholder="عنوان القصة" class="p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              <select name="category" class="p-2.5 rounded-xl border border-slate-300 font-bold text-sm bg-white">
+                <option value="قصص تعليمية">قصص تعليمية</option>
+                <option value="قصص عن الأخلاق">قصص عن الأخلاق</option>
+                <option value="قصص الأنبياء">قصص الأنبياء</option>
+                <option value="قصص تحفز على الاجتهاد">قصص تحفز على الاجتهاد</option>
+              </select>
+              <select name="theme" class="p-2.5 rounded-xl border border-slate-300 font-bold text-sm bg-white">
+                <option value="garden">رسمة الحديقة والطبيعة</option>
+                <option value="mosque">رسمة المسجد والهلال</option>
+                <option value="stars">رسمة النجوم والليل</option>
+                <option value="library">رسمة المكتبة والكتب</option>
+              </select>
+              <input name="age" value="6 - 10 سنوات" required class="p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              <textarea name="page1" required rows="2" placeholder="نص الصفحة الأولى من القصة..." class="sm:col-span-2 p-2.5 rounded-xl border border-slate-300 font-bold text-sm"></textarea>
+              <textarea name="page2" required rows="2" placeholder="نص الصفحة الثانية من القصة..." class="sm:col-span-2 p-2.5 rounded-xl border border-slate-300 font-bold text-sm"></textarea>
+              <div class="sm:col-span-2 flex justify-end">
+                <button type="submit" class="btn-tactile btn-teal px-6 py-2.5 rounded-xl bg-teal-600 text-white font-extrabold text-xs">+ نشر القصة في المكتبة</button>
+              </div>
+            </form>
+          </div>
+        `;
+      }
+
+      if (activeAdminTab === 'games') {
+        return `
+          <div class="space-y-6">
+            <h2 class="text-2xl font-black text-slate-900">🎮 إدارة الألعاب ونقاط الفتح</h2>
+            <div class="space-y-3">
+              ${nabtaState.gamesCatalog.map(g => `
+                <div class="p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                  <div class="flex items-center gap-3">
+                    <span class="text-2xl">${g.icon}</span>
+                    <div>
+                      <div class="font-black text-sm text-slate-900">${g.title}</div>
+                      <div class="text-xs text-slate-500">${g.desc}</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <label class="text-xs font-extrabold text-slate-600">نقاط الفتح:</label>
+                    <input type="number" min="0" max="200" value="${g.minPoints}" onchange="updateGameGate('${g.id}', this.value)" class="w-20 p-2 rounded-xl border border-slate-300 text-center font-black text-sm" />
+                    <button onclick="toggleGameStatus('${g.id}')" class="px-3 py-2 rounded-xl text-xs font-extrabold ${g.active ? 'bg-teal-100 text-teal-800' : 'bg-rose-100 text-rose-800'}">
+                      ${g.active ? 'مفعّلة ✓' : 'معطّلة'}
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (activeAdminTab === 'competitions') {
+        return `
+          <div class="space-y-6">
+            <h2 class="text-2xl font-black text-slate-900">🏆 إنشاء وإدارة المسابقات</h2>
+            <form onsubmit="adminCreateCompetition(event)" class="p-5 rounded-2xl bg-slate-50 border border-slate-200 grid sm:grid-cols-2 gap-4">
+              <input name="title" required placeholder="عنوان المسابقة" class="p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              <select name="category" class="p-2.5 rounded-xl border border-slate-300 font-bold text-sm bg-white">
+                <option value="مسابقات أسبوعية">مسابقات أسبوعية</option>
+                <option value="مسابقات ثقافية">مسابقات ثقافية</option>
+                <option value="مسابقات دينية">مسابقات دينية</option>
+                <option value="مسابقات رياضيات">مسابقات رياضيات</option>
+                <option value="مسابقات اللغة العربية والإنجليزية">مسابقات اللغة العربية والإنجليزية</option>
+              </select>
+              <div>
+                <label class="block text-xs font-bold mb-1">تاريخ البداية</label>
+                <input name="startDate" type="date" value="2026-11-18" required class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold mb-1">تاريخ النهاية</label>
+                <input name="endDate" type="date" value="2026-11-28" required class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              </div>
+              <input name="questionCount" type="number" value="5" min="1" max="20" required placeholder="عدد الأسئلة" class="p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              <input name="fee" type="number" value="0" min="0" placeholder="رسوم الاشتراك (0 للمجانية)" class="p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              <input name="prize" required placeholder="قيمة أو وصف الجائزة" class="sm:col-span-2 p-2.5 rounded-xl border border-slate-300 font-bold text-sm" />
+              <textarea name="details" required rows="2" placeholder="تفاصيل المسابقة..." class="sm:col-span-2 p-2.5 rounded-xl border border-slate-300 font-bold text-sm"></textarea>
+              <div class="sm:col-span-2 flex justify-end">
+                <button type="submit" class="btn-tactile btn-purple px-6 py-2.5 rounded-xl bg-purple-600 text-white font-extrabold text-xs">+ نشر المسابقة</button>
+              </div>
+            </form>
+          </div>
+        `;
+      }
+
+      if (activeAdminTab === 'students') {
+        return `
+          <div class="space-y-6">
+            <h2 class="text-2xl font-black text-slate-900">🎓 متابعة الطلاب وإدارة النقاط والحسابات</h2>
+            <div class="space-y-4">
+              ${nabtaState.students.map(s => `
+                <div class="p-4 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+                  <div>
+                    <div class="font-black text-base text-slate-900">${s.name}</div>
+                    <div class="text-xs text-slate-500">${s.grade} • المستويات المكتملة: ${s.completedLevels.length} • التقدم: ${calculateStudentProgress(s)}%</div>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="px-3 py-1 rounded-full bg-amber-100 text-amber-900 font-black text-xs">${s.points} نقطة</span>
+                    <button onclick="adminGrantStudentBonus('${s.id}', 5)" class="px-3 py-1.5 rounded-xl bg-teal-600 text-white font-extrabold text-xs">+5 نقاط مكافأة</button>
+                    <button onclick="adminGrantBadge('${s.id}')" class="px-3 py-1.5 rounded-xl bg-purple-100 text-purple-800 font-extrabold text-xs">+ منح شارة</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+
+      if (activeAdminTab === 'payments') {
+        return `
+          <div class="space-y-6">
+            <h2 class="text-2xl font-black text-slate-900">💳 إعدادات وسائل الدفع ومتابعة الاشتراكات</h2>
+            <form onsubmit="adminSavePaymentSettings(event)" class="p-5 rounded-2xl bg-sky-50 border border-sky-200 space-y-4">
+              <div class="font-black text-sm text-sky-900">بيانات المحفظة الإلكترونية ووسيلة الدفع (تظهر لولي الأمر فقط بعد مراجعة المسابقة)</div>
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-extrabold mb-1">اسم وسيلة الدفع المعتمدة</label>
+                  <input name="methodName" value="${nabtaState.paymentConfig.methodName}" required class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm bg-white" />
+                </div>
+                <div>
+                  <label class="block text-xs font-extrabold mb-1">رقم المحفظة الإلكترونية / الحساب</label>
+                  <input name="walletNumber" value="${nabtaState.paymentConfig.walletNumber}" required class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm bg-white" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-xs font-extrabold mb-1">تعليمات الدفع لولي الأمر</label>
+                <input name="instructions" value="${nabtaState.paymentConfig.instructions}" required class="w-full p-2.5 rounded-xl border border-slate-300 font-bold text-sm bg-white" />
+              </div>
+              <button type="submit" class="btn-tactile btn-teal px-6 py-2.5 rounded-xl bg-teal-600 text-white font-extrabold text-xs">حفظ إعدادات الدفع ✓</button>
+            </form>
+
+            <div class="space-y-3">
+              <h3 class="font-black text-base text-slate-900">سجل طلبات الاشتراكات والمدفوعات</h3>
+              ${nabtaState.parentApprovalQueue.map(r => `
+                <div class="p-4 rounded-2xl border border-slate-200 flex items-center justify-between gap-3">
+                  <div>
+                    <div class="font-black text-sm text-slate-900">${r.studentName} — ${r.contestTitle}</div>
+                    <div class="text-xs text-slate-500">الرسوم: ${r.fee} ج.م • التاريخ: ${r.requestedAt}</div>
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-xs font-extrabold ${r.status === 'approved' ? 'bg-emerald-100 text-emerald-800' : r.status === 'rejected' ? 'bg-rose-100 text-rose-800' : 'bg-amber-100 text-amber-800'}">
+                    ${r.status === 'approved' ? 'مدفوع ومؤكد من ولي الأمر' : r.status === 'rejected' ? 'مرفوض' : 'بانتظار ولي الأمر'}
+                  </span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }
+      return '';
+    }
+
+    function adminAddLesson(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const track = nabtaState.curriculumTracks[fd.get('trackId')];
+      if (!track || !track.levels[0]) return;
+      track.levels[0].lessons.push({
+        id: 'lsn-' + Date.now(),
+        title: fd.get('title').trim(),
+        summary: fd.get('summary').trim()
+      });
+      persistState();
+      showToast('تمت إضافة الدرس بنجاح ✅');
+      renderCurrentRoute();
+    }
+
+    function adminEditLessonPrompt(trackId, levelId, lessonId) {
+      const track = nabtaState.curriculumTracks[trackId];
+      const level = track.levels.find(l => l.id === levelId);
+      const lesson = level.lessons.find(l => l.id === lessonId);
+      openModal(`
+        <form onsubmit="adminCommitLessonEdit(event, '${trackId}', '${levelId}', '${lessonId}')" class="space-y-4">
+          <h3 class="text-xl font-black text-slate-900">تعديل الدرس</h3>
+          <input name="title" value="${lesson.title}" required class="w-full p-3 rounded-xl border border-slate-300 font-bold" />
+          <textarea name="summary" rows="3" required class="w-full p-3 rounded-xl border border-slate-300 font-bold">${lesson.summary}</textarea>
+          <div class="flex justify-end gap-2">
+            <button type="button" onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-100 font-bold text-sm">إلغاء</button>
+            <button type="submit" class="px-5 py-2 rounded-xl bg-teal-600 text-white font-extrabold text-sm">حفظ</button>
+          </div>
+        </form>
+      `);
+    }
+
+    function adminCommitLessonEdit(e, trackId, levelId, lessonId) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const lesson = nabtaState.curriculumTracks[trackId].levels.find(l => l.id === levelId).lessons.find(l => l.id === lessonId);
+      lesson.title = fd.get('title').trim();
+      lesson.summary = fd.get('summary').trim();
+      persistState();
+      closeModal();
+      showToast('تم تعديل الدرس بنجاح');
+      renderCurrentRoute();
+    }
+
+    function adminDeleteLesson(trackId, levelId, lessonId) {
+      const level = nabtaState.curriculumTracks[trackId].levels.find(l => l.id === levelId);
+      if (level.lessons.length <= 1) {
+        showToast('يجب أن يحتوي المستوى على درس واحد على الأقل', 'info');
+        return;
+      }
+      level.lessons = level.lessons.filter(l => l.id !== lessonId);
+      persistState();
+      showToast('تم حذف الدرس');
+      renderCurrentRoute();
+    }
+
+    function adminCreateLevel(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const track = nabtaState.curriculumTracks[fd.get('trackId')];
+      const nextNum = track.levels.length + 1;
+      track.levels.push({
+        id: `${track.id}-${Date.now()}`,
+        number: nextNum,
+        title: fd.get('title').trim(),
+        description: fd.get('description').trim(),
+        lessons: [
+          { id: 'lsn-' + Date.now(), title: 'مقدمة المستوى الجديد', summary: fd.get('description').trim() }
+        ],
+        quiz: [
+          { q: 'هل أتممت قراءة محتوى هذا المستوى بنجاح؟', options: ['نعم، جاهز للتقدم', 'أحتاج مراجعة'], answer: 0 }
+        ]
+      });
+      persistState();
+      showToast('تم إنشاء المستوى التعليمي الجديد بنجاح 🎉');
+      renderCurrentRoute();
+    }
+
+    function adminAddHomework(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      nabtaState.assignmentsList.push({
+        id: 'hw-' + Date.now(),
+        subjectId: fd.get('subjectId'),
+        title: fd.get('title').trim(),
+        desc: fd.get('desc').trim(),
+        points: 3
+      });
+      persistState();
+      showToast('تمت إضافة الواجب المنزلي للطلاب');
+      e.target.reset();
+    }
+
+    function adminAddQuizQuestion(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const track = nabtaState.curriculumTracks[fd.get('trackId')];
+      track.levels[0].quiz.push({
+        q: fd.get('q').trim(),
+        options: [fd.get('opt0').trim(), fd.get('opt1').trim()],
+        answer: 0
+      });
+      persistState();
+      showToast('تمت إضافة سؤال الاختبار بنجاح');
+      e.target.reset();
+    }
+
+    function adminAddStory(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      nabtaState.storyShelf.unshift({
+        id: 'st-' + Date.now(),
+        title: fd.get('title').trim(),
+        category: fd.get('category'),
+        age: fd.get('age').trim(),
+        rewardStars: 2,
+        theme: fd.get('theme'),
+        pages: [fd.get('page1').trim(), fd.get('page2').trim()]
+      });
+      persistState();
+      showToast('تم نشر القصة المصورة في المكتبة 📖');
+      e.target.reset();
+    }
+
+    function updateGameGate(gameId, minPts) {
+      const game = nabtaState.gamesCatalog.find(g => g.id === gameId);
+      if (game) {
+        game.minPoints = Math.max(0, Number(minPts) || 0);
+        persistState();
+        showToast(`تم تحديث نقاط فتح ${game.title}`);
+      }
+    }
+
+    function toggleGameStatus(gameId) {
+      const game = nabtaState.gamesCatalog.find(g => g.id === gameId);
+      if (game) {
+        game.active = !game.active;
+        persistState();
+        renderCurrentRoute();
+      }
+    }
+
+    function adminCreateCompetition(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const fee = Number(fd.get('fee') || 0);
+      nabtaState.arenaContests.unshift({
+        id: 'cmp-' + Date.now(),
+        title: fd.get('title').trim(),
+        category: fd.get('category'),
+        startDate: fd.get('startDate'),
+        endDate: fd.get('endDate'),
+        questionCount: Number(fd.get('questionCount') || 5),
+        isPaid: fee > 0,
+        fee,
+        prize: fd.get('prize').trim(),
+        details: fd.get('details').trim(),
+        questions: [
+          { q: 'ما شعار منصة نبتة التعليمية؟', options: ['نتعلم، نلعب، نبدع، ونكبر بالعلم', 'اللعب فقط'], answer: 0 }
+        ]
+      });
+      persistState();
+      showToast('تم إنشاء المسابقة ونشرها بنجاح 🏆');
+      e.target.reset();
+    }
+
+    function adminGrantStudentBonus(studentId, pts) {
+      const st = nabtaState.students.find(s => s.id === studentId);
+      if (!st) return;
+      st.points += pts;
+      st.stars += 1;
+      st.achievementsLog.unshift({
+        title: 'مكافأة تشجيعية من إدارة نبتة',
+        points: pts,
+        date: new Date().toISOString().slice(0, 10)
+      });
+      persistState();
+      showToast(`تم منح ${st.name} +${pts} نقاط مكافأة ⭐`);
+      renderCurrentRoute();
+    }
+
+    function adminGrantBadge(studentId) {
+      const st = nabtaState.students.find(s => s.id === studentId);
+      if (!st) return;
+      const badgeTitle = 'وسام التميز الذهبي';
+      if (!st.badges.includes(badgeTitle)) st.badges.push(badgeTitle);
+      persistState();
+      showToast(`تم منح ${badgeTitle} للطالب ${st.name} 🏅`);
+      renderCurrentRoute();
+    }
+
+    function adminSavePaymentSettings(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      nabtaState.paymentConfig.methodName = fd.get('methodName').trim();
+      nabtaState.paymentConfig.walletNumber = fd.get('walletNumber').trim();
+      nabtaState.paymentConfig.instructions = fd.get('instructions').trim();
+      persistState();
+      showToast('تم حفظ إعدادات وسائل الدفع بنجاح 💳');
+    }
+
+    function exportPlatformBackup() {
+      const dataStr = JSON.stringify(nabtaState, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `nabta-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('تم تنزيل ملف النسخ الاحتياطي بنجاح 💾');
+    }
+
+    function importPlatformBackup(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        try {
+          const parsed = JSON.parse(ev.target.result);
+          if (parsed.students && parsed.curriculumTracks) {
+            nabtaState = parsed;
+            persistState();
+            showToast('تمت استعادة النسخة الاحتياطية بنجاح ✅');
+            renderCurrentRoute();
+          } else {
+            showToast('ملف النسخ الاحتياطي غير صالح', 'error');
+          }
+        } catch (err) {
+          showToast('تعذّر قراءة ملف النسخة الاحتياطية', 'error');
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function renderCurrentRoute() {
+      const viewport = document.getElementById('appViewport');
+      refreshHeaderBar();
+
+      switch (currentRoute) {
+        case 'welcome':
+          viewport.innerHTML = renderWelcomeView();
+          break;
+        case 'subjects':
+          viewport.innerHTML = renderSubjectsView();
+          break;
+        case 'games':
+          viewport.innerHTML = renderGamesView();
+          break;
+        case 'stories':
+          viewport.innerHTML = renderStoriesView();
+          break;
+        case 'competitions':
+          viewport.innerHTML = renderCompetitionsView();
+          break;
+        case 'profile':
+          viewport.innerHTML = renderProfileView();
+          break;
+        case 'parent':
+          viewport.innerHTML = renderParentDashboard();
+          break;
+        case 'admin':
+          viewport.innerHTML = renderAdminPortal();
+          break;
+        default:
+          viewport.innerHTML = renderWelcomeView();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      syncLeaderboardWithStudents();
+      renderCurrentRoute();
+    });
+  </script>
+</body>
+</html>
